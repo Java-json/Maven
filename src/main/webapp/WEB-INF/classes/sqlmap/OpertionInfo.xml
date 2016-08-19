@@ -1,0 +1,2533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.honglian.data.IOpertionInfoData">
+    <resultMap id="opertionInfoResultMap" type="com.honglian.model.OpertionInfo">
+        <result property="id" column="id" />
+        <result property="opertionCode" column="opertion_code" />
+        <result property="opertionSort" column="opertion_sort" />
+        <result property="opertionName" column="opertion_name" />
+        <result property="opertionCondition" column="opertion_condition" />
+        <result property="opertionFlowScore" column="opertion_flow_score" />
+        <result property="opertionSkillScore" column="opertion_skill_score" />
+        <result property="opertionType" column="opertion_type" />
+        <result property="createrId" column="creater_id" />
+        <result property="createdAt" column="created_at" />
+        <result property="updatedAt" column="updated_at" />
+        <result property="timeStamp" column="time_stamp" />
+    </resultMap>
+    <sql id="OpertionInfoColumns"> id,opertion_code,opertion_sort,opertion_name,opertion_condition,opertion_flow_score,opertion_skill_score,opertion_type,creater_id,created_at,updated_at,time_stamp </sql>
+    <insert id="insertOpertionInfo" parameterType="OpertionInfo" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO tb_opertion_info(
+        <trim suffixOverrides=",">
+             id
+             <if test="opertionCode != null">,opertion_code</if>
+             <if test="opertionSort != null">,opertion_sort</if>
+             <if test="opertionName != null">,opertion_name</if>
+             <if test="opertionCondition != null">,opertion_condition</if>
+             <if test="opertionFlowScore != null">,opertion_flow_score</if>
+             <if test="opertionSkillScore != null">,opertion_skill_score</if>
+             <if test="opertionType != null">,opertion_type</if>
+             <if test="createrId != null">,creater_id</if>
+             <if test="createdAt != null">,created_at</if>
+             <if test="updatedAt != null">,updated_at</if>
+             <if test="timeStamp != null">,time_stamp</if>
+        </trim>
+        ) VALUES (
+        <trim suffixOverrides=",">
+             NULL
+             <if test="opertionCode != null">,#{opertionCode}</if>
+             <if test="opertionSort != null">,#{opertionSort}</if>
+             <if test="opertionName != null">,#{opertionName}</if>
+             <if test="opertionCondition != null">,#{opertionCondition}</if>
+             <if test="opertionFlowScore != null">,#{opertionFlowScore}</if>
+             <if test="opertionSkillScore != null">,#{opertionSkillScore}</if>
+             <if test="opertionType != null">,#{opertionType}</if>
+             <if test="createrId != null">,#{createrId}</if>
+             <if test="createdAt != null">,#{createdAt}</if>
+             <if test="updatedAt != null">,#{updatedAt}</if>
+             <if test="timeStamp != null">,#{timeStamp}</if>
+        </trim>
+        )
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+        SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+    </insert>
+    <update id="updateOpertionInfo" parameterType="OpertionInfo">
+        UPDATE tb_opertion_info
+        <set>
+             <if test="opertionCode != null">opertion_code = #{opertionCode},</if>
+             <if test="opertionSort != null">opertion_sort = #{opertionSort},</if>
+             <if test="opertionName != null">opertion_name = #{opertionName},</if>
+             <if test="opertionCondition != null">opertion_condition = #{opertionCondition},</if>
+             <if test="opertionFlowScore != null">opertion_flow_score = #{opertionFlowScore},</if>
+             <if test="opertionSkillScore != null">opertion_skill_score = #{opertionSkillScore},</if>
+             <if test="opertionType != null">opertion_type = #{opertionType},</if>
+             <if test="createrId != null">creater_id = #{createrId},</if>
+             <if test="createdAt != null">created_at = #{createdAt},</if>
+             <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+             <if test="timeStamp != null">time_stamp = #{timeStamp}</if>
+        </set>
+        WHERE id = #{id} LIMIT 1
+    </update>
+    <delete id="deleteOpertionInfo" parameterType="OpertionInfo">
+        DELETE FROM tb_opertion_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="opertionCode != null">  AND opertion_code = #{opertionCode}</if>
+             <if test="opertionCode == null and _range != null and _range.opertionCode != null">
+                 <if test="_range.opertionCode.min != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCode.min}</if>
+                 <if test="_range.opertionCode.max != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCode.max}</if>
+             </if>
+             <if test="opertionCode == null and _like != null and _like.opertionCode != null">
+                 <if test="_like.opertionCode.like != null">AND opertion_code like '%${_like.opertionCode.like}%'</if>
+             </if>
+             <if test="opertionCode == null and _in != null and _in.opertionCode != null">
+                 <if test="_in.opertionCode.str != null">AND opertion_code in (${_in.opertionCode.str})</if>
+             </if>
+             <if test="opertionCode == null and _notin != null and _notin.opertionCode != null">
+                 <if test="_notin.opertionCode.str != null">AND opertion_code not in (${_notin.opertionCode.str})</if>
+             </if>
+             <if test="opertionSort != null">  AND opertion_sort = #{opertionSort}</if>
+             <if test="opertionSort == null and _range != null and _range.opertionSort != null">
+                 <if test="_range.opertionSort.min != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSort.min}</if>
+                 <if test="_range.opertionSort.max != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSort.max}</if>
+             </if>
+             <if test="opertionSort == null and _like != null and _like.opertionSort != null">
+                 <if test="_like.opertionSort.like != null">AND opertion_sort like '%${_like.opertionSort.like}%'</if>
+             </if>
+             <if test="opertionSort == null and _in != null and _in.opertionSort != null">
+                 <if test="_in.opertionSort.str != null">AND opertion_sort in (${_in.opertionSort.str})</if>
+             </if>
+             <if test="opertionSort == null and _notin != null and _notin.opertionSort != null">
+                 <if test="_notin.opertionSort.str != null">AND opertion_sort not in (${_notin.opertionSort.str})</if>
+             </if>
+             <if test="opertionName != null">  AND opertion_name = #{opertionName}</if>
+             <if test="opertionName == null and _range != null and _range.opertionName != null">
+                 <if test="_range.opertionName.min != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionName.min}</if>
+                 <if test="_range.opertionName.max != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionName.max}</if>
+             </if>
+             <if test="opertionName == null and _like != null and _like.opertionName != null">
+                 <if test="_like.opertionName.like != null">AND opertion_name like '%${_like.opertionName.like}%'</if>
+             </if>
+             <if test="opertionName == null and _in != null and _in.opertionName != null">
+                 <if test="_in.opertionName.str != null">AND opertion_name in (${_in.opertionName.str})</if>
+             </if>
+             <if test="opertionName == null and _notin != null and _notin.opertionName != null">
+                 <if test="_notin.opertionName.str != null">AND opertion_name not in (${_notin.opertionName.str})</if>
+             </if>
+             <if test="opertionCondition != null">  AND opertion_condition = #{opertionCondition}</if>
+             <if test="opertionCondition == null and _range != null and _range.opertionCondition != null">
+                 <if test="_range.opertionCondition.min != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCondition.min}</if>
+                 <if test="_range.opertionCondition.max != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCondition.max}</if>
+             </if>
+             <if test="opertionCondition == null and _like != null and _like.opertionCondition != null">
+                 <if test="_like.opertionCondition.like != null">AND opertion_condition like '%${_like.opertionCondition.like}%'</if>
+             </if>
+             <if test="opertionCondition == null and _in != null and _in.opertionCondition != null">
+                 <if test="_in.opertionCondition.str != null">AND opertion_condition in (${_in.opertionCondition.str})</if>
+             </if>
+             <if test="opertionCondition == null and _notin != null and _notin.opertionCondition != null">
+                 <if test="_notin.opertionCondition.str != null">AND opertion_condition not in (${_notin.opertionCondition.str})</if>
+             </if>
+             <if test="opertionFlowScore != null">  AND opertion_flow_score = #{opertionFlowScore}</if>
+             <if test="opertionFlowScore == null and _range != null and _range.opertionFlowScore != null">
+                 <if test="_range.opertionFlowScore.min != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionFlowScore.min}</if>
+                 <if test="_range.opertionFlowScore.max != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionFlowScore.max}</if>
+             </if>
+             <if test="opertionFlowScore == null and _like != null and _like.opertionFlowScore != null">
+                 <if test="_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_like.opertionFlowScore.like}%'</if>
+             </if>
+             <if test="opertionFlowScore == null and _in != null and _in.opertionFlowScore != null">
+                 <if test="_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionFlowScore == null and _notin != null and _notin.opertionFlowScore != null">
+                 <if test="_notin.opertionFlowScore.str != null">AND opertion_flow_score not in (${_notin.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionSkillScore != null">  AND opertion_skill_score = #{opertionSkillScore}</if>
+             <if test="opertionSkillScore == null and _range != null and _range.opertionSkillScore != null">
+                 <if test="_range.opertionSkillScore.min != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSkillScore.min}</if>
+                 <if test="_range.opertionSkillScore.max != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSkillScore.max}</if>
+             </if>
+             <if test="opertionSkillScore == null and _like != null and _like.opertionSkillScore != null">
+                 <if test="_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_like.opertionSkillScore.like}%'</if>
+             </if>
+             <if test="opertionSkillScore == null and _in != null and _in.opertionSkillScore != null">
+                 <if test="_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionSkillScore == null and _notin != null and _notin.opertionSkillScore != null">
+                 <if test="_notin.opertionSkillScore.str != null">AND opertion_skill_score not in (${_notin.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionType != null">  AND opertion_type = #{opertionType}</if>
+             <if test="opertionType == null and _range != null and _range.opertionType != null">
+                 <if test="_range.opertionType.min != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionType.min}</if>
+                 <if test="_range.opertionType.max != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionType.max}</if>
+             </if>
+             <if test="opertionType == null and _like != null and _like.opertionType != null">
+                 <if test="_like.opertionType.like != null">AND opertion_type like '%${_like.opertionType.like}%'</if>
+             </if>
+             <if test="opertionType == null and _in != null and _in.opertionType != null">
+                 <if test="_in.opertionType.str != null">AND opertion_type in (${_in.opertionType.str})</if>
+             </if>
+             <if test="opertionType == null and _notin != null and _notin.opertionType != null">
+                 <if test="_notin.opertionType.str != null">AND opertion_type not in (${_notin.opertionType.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test="_or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCode != null">
+                 <if test="_or_like.opertionCode.like != null">AND opertion_code like '%${_or_like.opertionCode.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionCode != null">
+                 <if test="_or.opertionCode.str != null"> AND opertion_code = ${_or.opertionCode.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionCode != null">
+                 <if test="_or_in.opertionCode.str != null">AND opertion_code in (${_or_in.opertionCode.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionCode != null">
+                 <if test="_or_not_in.opertionCode.str != null">AND opertion_code not in (${_or_not_in.opertionCode.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSort != null">
+                 <if test="_or_like.opertionSort.like != null">AND opertion_sort like '%${_or_like.opertionSort.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionSort != null">
+                 <if test="_or.opertionSort.str != null"> AND opertion_sort = ${_or.opertionSort.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionSort != null">
+                 <if test="_or_in.opertionSort.str != null">AND opertion_sort in (${_or_in.opertionSort.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionSort != null">
+                 <if test="_or_not_in.opertionSort.str != null">AND opertion_sort not in (${_or_not_in.opertionSort.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionName != null">
+                 <if test="_or_like.opertionName.like != null">AND opertion_name like '%${_or_like.opertionName.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionName != null">
+                 <if test="_or.opertionName.str != null"> AND opertion_name = ${_or.opertionName.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionName != null">
+                 <if test="_or_in.opertionName.str != null">AND opertion_name in (${_or_in.opertionName.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionName != null">
+                 <if test="_or_not_in.opertionName.str != null">AND opertion_name not in (${_or_not_in.opertionName.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCondition != null">
+                 <if test="_or_like.opertionCondition.like != null">AND opertion_condition like '%${_or_like.opertionCondition.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionCondition != null">
+                 <if test="_or.opertionCondition.str != null"> AND opertion_condition = ${_or.opertionCondition.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionCondition != null">
+                 <if test="_or_in.opertionCondition.str != null">AND opertion_condition in (${_or_in.opertionCondition.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionCondition != null">
+                 <if test="_or_not_in.opertionCondition.str != null">AND opertion_condition not in (${_or_not_in.opertionCondition.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionFlowScore != null">
+                 <if test="_or_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_or_like.opertionFlowScore.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionFlowScore != null">
+                 <if test="_or.opertionFlowScore.str != null"> AND opertion_flow_score = ${_or.opertionFlowScore.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionFlowScore != null">
+                 <if test="_or_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_or_in.opertionFlowScore.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionFlowScore != null">
+                 <if test="_or_not_in.opertionFlowScore.str != null">AND opertion_flow_score not in (${_or_not_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSkillScore != null">
+                 <if test="_or_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_or_like.opertionSkillScore.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionSkillScore != null">
+                 <if test="_or.opertionSkillScore.str != null"> AND opertion_skill_score = ${_or.opertionSkillScore.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionSkillScore != null">
+                 <if test="_or_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_or_in.opertionSkillScore.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionSkillScore != null">
+                 <if test="_or_not_in.opertionSkillScore.str != null">AND opertion_skill_score not in (${_or_not_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionType != null">
+                 <if test="_or_like.opertionType.like != null">AND opertion_type like '%${_or_like.opertionType.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionType != null">
+                 <if test="_or.opertionType.str != null"> AND opertion_type = ${_or.opertionType.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionType != null">
+                 <if test="_or_in.opertionType.str != null">AND opertion_type in (${_or_in.opertionType.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionType != null">
+                 <if test="_or_not_in.opertionType.str != null">AND opertion_type not in (${_or_not_in.opertionType.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test="_or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.opertionCode != null">
+                 <if test="_null.opertionCode.str == null"> AND opertion_code is null</if>
+                </if>
+                <if test="_null.opertionSort != null">
+                 <if test="_null.opertionSort.str == null"> AND opertion_sort is null</if>
+                </if>
+                <if test="_null.opertionName != null">
+                 <if test="_null.opertionName.str == null"> AND opertion_name is null</if>
+                </if>
+                <if test="_null.opertionCondition != null">
+                 <if test="_null.opertionCondition.str == null"> AND opertion_condition is null</if>
+                </if>
+                <if test="_null.opertionFlowScore != null">
+                 <if test="_null.opertionFlowScore.str == null"> AND opertion_flow_score is null</if>
+                </if>
+                <if test="_null.opertionSkillScore != null">
+                 <if test="_null.opertionSkillScore.str == null"> AND opertion_skill_score is null</if>
+                </if>
+                <if test="_null.opertionType != null">
+                 <if test="_null.opertionType.str == null"> AND opertion_type is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.opertionCode != null">
+                 <if test="_not_null.opertionCode.str != null"> AND opertion_code is not null</if>
+                </if>
+                <if test="_not_null.opertionSort != null">
+                 <if test="_not_null.opertionSort.str != null"> AND opertion_sort is not null</if>
+                </if>
+                <if test="_not_null.opertionName != null">
+                 <if test="_not_null.opertionName.str != null"> AND opertion_name is not null</if>
+                </if>
+                <if test="_not_null.opertionCondition != null">
+                 <if test="_not_null.opertionCondition.str != null"> AND opertion_condition is not null</if>
+                </if>
+                <if test="_not_null.opertionFlowScore != null">
+                 <if test="_not_null.opertionFlowScore.str != null"> AND opertion_flow_score is not null</if>
+                </if>
+                <if test="_not_null.opertionSkillScore != null">
+                 <if test="_not_null.opertionSkillScore.str != null"> AND opertion_skill_score is not null</if>
+                </if>
+                <if test="_not_null.opertionType != null">
+                 <if test="_not_null.opertionType.str != null"> AND opertion_type is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+    </delete>
+    <select id="getOpertionInfo" parameterType="OpertionInfo" resultMap="opertionInfoResultMap">
+        SELECT * FROM tb_opertion_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="opertionCode != null">  AND opertion_code = #{opertionCode}</if>
+             <if test="opertionCode == null and _range != null and _range.opertionCode != null">
+                 <if test="_range.opertionCode.min != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCode.min}</if>
+                 <if test="_range.opertionCode.max != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCode.max}</if>
+             </if>
+             <if test="opertionCode == null and _like != null and _like.opertionCode != null">
+                 <if test="_like.opertionCode.like != null">AND opertion_code like '%${_like.opertionCode.like}%'</if>
+             </if>
+             <if test="opertionCode == null and _in != null and _in.opertionCode != null">
+                 <if test="_in.opertionCode.str != null">AND opertion_code in (${_in.opertionCode.str})</if>
+             </if>
+             <if test="opertionCode == null and _notin != null and _notin.opertionCode != null">
+                 <if test="_notin.opertionCode.str != null">AND opertion_code not in (${_notin.opertionCode.str})</if>
+             </if>
+             <if test="opertionSort != null">  AND opertion_sort = #{opertionSort}</if>
+             <if test="opertionSort == null and _range != null and _range.opertionSort != null">
+                 <if test="_range.opertionSort.min != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSort.min}</if>
+                 <if test="_range.opertionSort.max != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSort.max}</if>
+             </if>
+             <if test="opertionSort == null and _like != null and _like.opertionSort != null">
+                 <if test="_like.opertionSort.like != null">AND opertion_sort like '%${_like.opertionSort.like}%'</if>
+             </if>
+             <if test="opertionSort == null and _in != null and _in.opertionSort != null">
+                 <if test="_in.opertionSort.str != null">AND opertion_sort in (${_in.opertionSort.str})</if>
+             </if>
+             <if test="opertionSort == null and _notin != null and _notin.opertionSort != null">
+                 <if test="_notin.opertionSort.str != null">AND opertion_sort not in (${_notin.opertionSort.str})</if>
+             </if>
+             <if test="opertionName != null">  AND opertion_name = #{opertionName}</if>
+             <if test="opertionName == null and _range != null and _range.opertionName != null">
+                 <if test="_range.opertionName.min != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionName.min}</if>
+                 <if test="_range.opertionName.max != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionName.max}</if>
+             </if>
+             <if test="opertionName == null and _like != null and _like.opertionName != null">
+                 <if test="_like.opertionName.like != null">AND opertion_name like '%${_like.opertionName.like}%'</if>
+             </if>
+             <if test="opertionName == null and _in != null and _in.opertionName != null">
+                 <if test="_in.opertionName.str != null">AND opertion_name in (${_in.opertionName.str})</if>
+             </if>
+             <if test="opertionName == null and _notin != null and _notin.opertionName != null">
+                 <if test="_notin.opertionName.str != null">AND opertion_name not in (${_notin.opertionName.str})</if>
+             </if>
+             <if test="opertionCondition != null">  AND opertion_condition = #{opertionCondition}</if>
+             <if test="opertionCondition == null and _range != null and _range.opertionCondition != null">
+                 <if test="_range.opertionCondition.min != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCondition.min}</if>
+                 <if test="_range.opertionCondition.max != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCondition.max}</if>
+             </if>
+             <if test="opertionCondition == null and _like != null and _like.opertionCondition != null">
+                 <if test="_like.opertionCondition.like != null">AND opertion_condition like '%${_like.opertionCondition.like}%'</if>
+             </if>
+             <if test="opertionCondition == null and _in != null and _in.opertionCondition != null">
+                 <if test="_in.opertionCondition.str != null">AND opertion_condition in (${_in.opertionCondition.str})</if>
+             </if>
+             <if test="opertionCondition == null and _notin != null and _notin.opertionCondition != null">
+                 <if test="_notin.opertionCondition.str != null">AND opertion_condition not in (${_notin.opertionCondition.str})</if>
+             </if>
+             <if test="opertionFlowScore != null">  AND opertion_flow_score = #{opertionFlowScore}</if>
+             <if test="opertionFlowScore == null and _range != null and _range.opertionFlowScore != null">
+                 <if test="_range.opertionFlowScore.min != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionFlowScore.min}</if>
+                 <if test="_range.opertionFlowScore.max != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionFlowScore.max}</if>
+             </if>
+             <if test="opertionFlowScore == null and _like != null and _like.opertionFlowScore != null">
+                 <if test="_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_like.opertionFlowScore.like}%'</if>
+             </if>
+             <if test="opertionFlowScore == null and _in != null and _in.opertionFlowScore != null">
+                 <if test="_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionFlowScore == null and _notin != null and _notin.opertionFlowScore != null">
+                 <if test="_notin.opertionFlowScore.str != null">AND opertion_flow_score not in (${_notin.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionSkillScore != null">  AND opertion_skill_score = #{opertionSkillScore}</if>
+             <if test="opertionSkillScore == null and _range != null and _range.opertionSkillScore != null">
+                 <if test="_range.opertionSkillScore.min != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSkillScore.min}</if>
+                 <if test="_range.opertionSkillScore.max != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSkillScore.max}</if>
+             </if>
+             <if test="opertionSkillScore == null and _like != null and _like.opertionSkillScore != null">
+                 <if test="_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_like.opertionSkillScore.like}%'</if>
+             </if>
+             <if test="opertionSkillScore == null and _in != null and _in.opertionSkillScore != null">
+                 <if test="_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionSkillScore == null and _notin != null and _notin.opertionSkillScore != null">
+                 <if test="_notin.opertionSkillScore.str != null">AND opertion_skill_score not in (${_notin.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionType != null">  AND opertion_type = #{opertionType}</if>
+             <if test="opertionType == null and _range != null and _range.opertionType != null">
+                 <if test="_range.opertionType.min != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionType.min}</if>
+                 <if test="_range.opertionType.max != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionType.max}</if>
+             </if>
+             <if test="opertionType == null and _like != null and _like.opertionType != null">
+                 <if test="_like.opertionType.like != null">AND opertion_type like '%${_like.opertionType.like}%'</if>
+             </if>
+             <if test="opertionType == null and _in != null and _in.opertionType != null">
+                 <if test="_in.opertionType.str != null">AND opertion_type in (${_in.opertionType.str})</if>
+             </if>
+             <if test="opertionType == null and _notin != null and _notin.opertionType != null">
+                 <if test="_notin.opertionType.str != null">AND opertion_type not in (${_notin.opertionType.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test="_or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCode != null">
+                 <if test="_or_like.opertionCode.like != null">AND opertion_code like '%${_or_like.opertionCode.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionCode != null">
+                 <if test="_or.opertionCode.str != null"> AND opertion_code = ${_or.opertionCode.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionCode != null">
+                 <if test="_or_in.opertionCode.str != null">AND opertion_code in (${_or_in.opertionCode.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionCode != null">
+                 <if test="_or_not_in.opertionCode.str != null">AND opertion_code not in (${_or_not_in.opertionCode.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSort != null">
+                 <if test="_or_like.opertionSort.like != null">AND opertion_sort like '%${_or_like.opertionSort.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionSort != null">
+                 <if test="_or.opertionSort.str != null"> AND opertion_sort = ${_or.opertionSort.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionSort != null">
+                 <if test="_or_in.opertionSort.str != null">AND opertion_sort in (${_or_in.opertionSort.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionSort != null">
+                 <if test="_or_not_in.opertionSort.str != null">AND opertion_sort not in (${_or_not_in.opertionSort.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionName != null">
+                 <if test="_or_like.opertionName.like != null">AND opertion_name like '%${_or_like.opertionName.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionName != null">
+                 <if test="_or.opertionName.str != null"> AND opertion_name = ${_or.opertionName.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionName != null">
+                 <if test="_or_in.opertionName.str != null">AND opertion_name in (${_or_in.opertionName.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionName != null">
+                 <if test="_or_not_in.opertionName.str != null">AND opertion_name not in (${_or_not_in.opertionName.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCondition != null">
+                 <if test="_or_like.opertionCondition.like != null">AND opertion_condition like '%${_or_like.opertionCondition.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionCondition != null">
+                 <if test="_or.opertionCondition.str != null"> AND opertion_condition = ${_or.opertionCondition.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionCondition != null">
+                 <if test="_or_in.opertionCondition.str != null">AND opertion_condition in (${_or_in.opertionCondition.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionCondition != null">
+                 <if test="_or_not_in.opertionCondition.str != null">AND opertion_condition not in (${_or_not_in.opertionCondition.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionFlowScore != null">
+                 <if test="_or_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_or_like.opertionFlowScore.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionFlowScore != null">
+                 <if test="_or.opertionFlowScore.str != null"> AND opertion_flow_score = ${_or.opertionFlowScore.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionFlowScore != null">
+                 <if test="_or_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_or_in.opertionFlowScore.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionFlowScore != null">
+                 <if test="_or_not_in.opertionFlowScore.str != null">AND opertion_flow_score not in (${_or_not_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSkillScore != null">
+                 <if test="_or_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_or_like.opertionSkillScore.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionSkillScore != null">
+                 <if test="_or.opertionSkillScore.str != null"> AND opertion_skill_score = ${_or.opertionSkillScore.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionSkillScore != null">
+                 <if test="_or_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_or_in.opertionSkillScore.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionSkillScore != null">
+                 <if test="_or_not_in.opertionSkillScore.str != null">AND opertion_skill_score not in (${_or_not_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionType != null">
+                 <if test="_or_like.opertionType.like != null">AND opertion_type like '%${_or_like.opertionType.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionType != null">
+                 <if test="_or.opertionType.str != null"> AND opertion_type = ${_or.opertionType.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionType != null">
+                 <if test="_or_in.opertionType.str != null">AND opertion_type in (${_or_in.opertionType.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionType != null">
+                 <if test="_or_not_in.opertionType.str != null">AND opertion_type not in (${_or_not_in.opertionType.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test="_or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.opertionCode != null">
+                 <if test="_null.opertionCode.str == null"> AND opertion_code is null</if>
+                </if>
+                <if test="_null.opertionSort != null">
+                 <if test="_null.opertionSort.str == null"> AND opertion_sort is null</if>
+                </if>
+                <if test="_null.opertionName != null">
+                 <if test="_null.opertionName.str == null"> AND opertion_name is null</if>
+                </if>
+                <if test="_null.opertionCondition != null">
+                 <if test="_null.opertionCondition.str == null"> AND opertion_condition is null</if>
+                </if>
+                <if test="_null.opertionFlowScore != null">
+                 <if test="_null.opertionFlowScore.str == null"> AND opertion_flow_score is null</if>
+                </if>
+                <if test="_null.opertionSkillScore != null">
+                 <if test="_null.opertionSkillScore.str == null"> AND opertion_skill_score is null</if>
+                </if>
+                <if test="_null.opertionType != null">
+                 <if test="_null.opertionType.str == null"> AND opertion_type is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.opertionCode != null">
+                 <if test="_not_null.opertionCode.str != null"> AND opertion_code is not null</if>
+                </if>
+                <if test="_not_null.opertionSort != null">
+                 <if test="_not_null.opertionSort.str != null"> AND opertion_sort is not null</if>
+                </if>
+                <if test="_not_null.opertionName != null">
+                 <if test="_not_null.opertionName.str != null"> AND opertion_name is not null</if>
+                </if>
+                <if test="_not_null.opertionCondition != null">
+                 <if test="_not_null.opertionCondition.str != null"> AND opertion_condition is not null</if>
+                </if>
+                <if test="_not_null.opertionFlowScore != null">
+                 <if test="_not_null.opertionFlowScore.str != null"> AND opertion_flow_score is not null</if>
+                </if>
+                <if test="_not_null.opertionSkillScore != null">
+                 <if test="_not_null.opertionSkillScore.str != null"> AND opertion_skill_score is not null</if>
+                </if>
+                <if test="_not_null.opertionType != null">
+                 <if test="_not_null.opertionType.str != null"> AND opertion_type is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+    </select>
+    <select id="getOpertionInfoCount" parameterType="OpertionInfo" resultType="int">
+        SELECT COUNT(*) AS cnt FROM tb_opertion_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="opertionCode != null">  AND opertion_code = #{opertionCode}</if>
+             <if test="opertionCode == null and _range != null and _range.opertionCode != null">
+                 <if test="_range.opertionCode.min != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCode.min}</if>
+                 <if test="_range.opertionCode.max != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCode.max}</if>
+             </if>
+             <if test="opertionCode == null and _like != null and _like.opertionCode != null">
+                 <if test="_like.opertionCode.like != null">AND opertion_code like '%${_like.opertionCode.like}%'</if>
+             </if>
+             <if test="opertionCode == null and _in != null and _in.opertionCode != null">
+                 <if test="_in.opertionCode.str != null">AND opertion_code in (${_in.opertionCode.str})</if>
+             </if>
+             <if test="opertionCode == null and _notin != null and _notin.opertionCode != null">
+                 <if test="_notin.opertionCode.str != null">AND opertion_code not in (${_notin.opertionCode.str})</if>
+             </if>
+             <if test="opertionSort != null">  AND opertion_sort = #{opertionSort}</if>
+             <if test="opertionSort == null and _range != null and _range.opertionSort != null">
+                 <if test="_range.opertionSort.min != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSort.min}</if>
+                 <if test="_range.opertionSort.max != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSort.max}</if>
+             </if>
+             <if test="opertionSort == null and _like != null and _like.opertionSort != null">
+                 <if test="_like.opertionSort.like != null">AND opertion_sort like '%${_like.opertionSort.like}%'</if>
+             </if>
+             <if test="opertionSort == null and _in != null and _in.opertionSort != null">
+                 <if test="_in.opertionSort.str != null">AND opertion_sort in (${_in.opertionSort.str})</if>
+             </if>
+             <if test="opertionSort == null and _notin != null and _notin.opertionSort != null">
+                 <if test="_notin.opertionSort.str != null">AND opertion_sort not in (${_notin.opertionSort.str})</if>
+             </if>
+             <if test="opertionName != null">  AND opertion_name = #{opertionName}</if>
+             <if test="opertionName == null and _range != null and _range.opertionName != null">
+                 <if test="_range.opertionName.min != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionName.min}</if>
+                 <if test="_range.opertionName.max != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionName.max}</if>
+             </if>
+             <if test="opertionName == null and _like != null and _like.opertionName != null">
+                 <if test="_like.opertionName.like != null">AND opertion_name like '%${_like.opertionName.like}%'</if>
+             </if>
+             <if test="opertionName == null and _in != null and _in.opertionName != null">
+                 <if test="_in.opertionName.str != null">AND opertion_name in (${_in.opertionName.str})</if>
+             </if>
+             <if test="opertionName == null and _notin != null and _notin.opertionName != null">
+                 <if test="_notin.opertionName.str != null">AND opertion_name not in (${_notin.opertionName.str})</if>
+             </if>
+             <if test="opertionCondition != null">  AND opertion_condition = #{opertionCondition}</if>
+             <if test="opertionCondition == null and _range != null and _range.opertionCondition != null">
+                 <if test="_range.opertionCondition.min != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCondition.min}</if>
+                 <if test="_range.opertionCondition.max != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCondition.max}</if>
+             </if>
+             <if test="opertionCondition == null and _like != null and _like.opertionCondition != null">
+                 <if test="_like.opertionCondition.like != null">AND opertion_condition like '%${_like.opertionCondition.like}%'</if>
+             </if>
+             <if test="opertionCondition == null and _in != null and _in.opertionCondition != null">
+                 <if test="_in.opertionCondition.str != null">AND opertion_condition in (${_in.opertionCondition.str})</if>
+             </if>
+             <if test="opertionCondition == null and _notin != null and _notin.opertionCondition != null">
+                 <if test="_notin.opertionCondition.str != null">AND opertion_condition not in (${_notin.opertionCondition.str})</if>
+             </if>
+             <if test="opertionFlowScore != null">  AND opertion_flow_score = #{opertionFlowScore}</if>
+             <if test="opertionFlowScore == null and _range != null and _range.opertionFlowScore != null">
+                 <if test="_range.opertionFlowScore.min != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionFlowScore.min}</if>
+                 <if test="_range.opertionFlowScore.max != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionFlowScore.max}</if>
+             </if>
+             <if test="opertionFlowScore == null and _like != null and _like.opertionFlowScore != null">
+                 <if test="_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_like.opertionFlowScore.like}%'</if>
+             </if>
+             <if test="opertionFlowScore == null and _in != null and _in.opertionFlowScore != null">
+                 <if test="_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionFlowScore == null and _notin != null and _notin.opertionFlowScore != null">
+                 <if test="_notin.opertionFlowScore.str != null">AND opertion_flow_score not in (${_notin.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionSkillScore != null">  AND opertion_skill_score = #{opertionSkillScore}</if>
+             <if test="opertionSkillScore == null and _range != null and _range.opertionSkillScore != null">
+                 <if test="_range.opertionSkillScore.min != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSkillScore.min}</if>
+                 <if test="_range.opertionSkillScore.max != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSkillScore.max}</if>
+             </if>
+             <if test="opertionSkillScore == null and _like != null and _like.opertionSkillScore != null">
+                 <if test="_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_like.opertionSkillScore.like}%'</if>
+             </if>
+             <if test="opertionSkillScore == null and _in != null and _in.opertionSkillScore != null">
+                 <if test="_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionSkillScore == null and _notin != null and _notin.opertionSkillScore != null">
+                 <if test="_notin.opertionSkillScore.str != null">AND opertion_skill_score not in (${_notin.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionType != null">  AND opertion_type = #{opertionType}</if>
+             <if test="opertionType == null and _range != null and _range.opertionType != null">
+                 <if test="_range.opertionType.min != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionType.min}</if>
+                 <if test="_range.opertionType.max != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionType.max}</if>
+             </if>
+             <if test="opertionType == null and _like != null and _like.opertionType != null">
+                 <if test="_like.opertionType.like != null">AND opertion_type like '%${_like.opertionType.like}%'</if>
+             </if>
+             <if test="opertionType == null and _in != null and _in.opertionType != null">
+                 <if test="_in.opertionType.str != null">AND opertion_type in (${_in.opertionType.str})</if>
+             </if>
+             <if test="opertionType == null and _notin != null and _notin.opertionType != null">
+                 <if test="_notin.opertionType.str != null">AND opertion_type not in (${_notin.opertionType.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test="_or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCode != null">
+                 <if test="_or_like.opertionCode.like != null">AND opertion_code like '%${_or_like.opertionCode.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionCode != null">
+                 <if test="_or.opertionCode.str != null"> AND opertion_code = ${_or.opertionCode.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionCode != null">
+                 <if test="_or_in.opertionCode.str != null">AND opertion_code in (${_or_in.opertionCode.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionCode != null">
+                 <if test="_or_not_in.opertionCode.str != null">AND opertion_code not in (${_or_not_in.opertionCode.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSort != null">
+                 <if test="_or_like.opertionSort.like != null">AND opertion_sort like '%${_or_like.opertionSort.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionSort != null">
+                 <if test="_or.opertionSort.str != null"> AND opertion_sort = ${_or.opertionSort.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionSort != null">
+                 <if test="_or_in.opertionSort.str != null">AND opertion_sort in (${_or_in.opertionSort.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionSort != null">
+                 <if test="_or_not_in.opertionSort.str != null">AND opertion_sort not in (${_or_not_in.opertionSort.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionName != null">
+                 <if test="_or_like.opertionName.like != null">AND opertion_name like '%${_or_like.opertionName.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionName != null">
+                 <if test="_or.opertionName.str != null"> AND opertion_name = ${_or.opertionName.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionName != null">
+                 <if test="_or_in.opertionName.str != null">AND opertion_name in (${_or_in.opertionName.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionName != null">
+                 <if test="_or_not_in.opertionName.str != null">AND opertion_name not in (${_or_not_in.opertionName.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCondition != null">
+                 <if test="_or_like.opertionCondition.like != null">AND opertion_condition like '%${_or_like.opertionCondition.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionCondition != null">
+                 <if test="_or.opertionCondition.str != null"> AND opertion_condition = ${_or.opertionCondition.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionCondition != null">
+                 <if test="_or_in.opertionCondition.str != null">AND opertion_condition in (${_or_in.opertionCondition.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionCondition != null">
+                 <if test="_or_not_in.opertionCondition.str != null">AND opertion_condition not in (${_or_not_in.opertionCondition.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionFlowScore != null">
+                 <if test="_or_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_or_like.opertionFlowScore.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionFlowScore != null">
+                 <if test="_or.opertionFlowScore.str != null"> AND opertion_flow_score = ${_or.opertionFlowScore.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionFlowScore != null">
+                 <if test="_or_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_or_in.opertionFlowScore.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionFlowScore != null">
+                 <if test="_or_not_in.opertionFlowScore.str != null">AND opertion_flow_score not in (${_or_not_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSkillScore != null">
+                 <if test="_or_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_or_like.opertionSkillScore.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionSkillScore != null">
+                 <if test="_or.opertionSkillScore.str != null"> AND opertion_skill_score = ${_or.opertionSkillScore.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionSkillScore != null">
+                 <if test="_or_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_or_in.opertionSkillScore.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionSkillScore != null">
+                 <if test="_or_not_in.opertionSkillScore.str != null">AND opertion_skill_score not in (${_or_not_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionType != null">
+                 <if test="_or_like.opertionType.like != null">AND opertion_type like '%${_or_like.opertionType.like}%'</if>
+             </if>
+                <if test="_or != null and _or.opertionType != null">
+                 <if test="_or.opertionType.str != null"> AND opertion_type = ${_or.opertionType.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.opertionType != null">
+                 <if test="_or_in.opertionType.str != null">AND opertion_type in (${_or_in.opertionType.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.opertionType != null">
+                 <if test="_or_not_in.opertionType.str != null">AND opertion_type not in (${_or_not_in.opertionType.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test="_or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.opertionCode != null">
+                 <if test="_null.opertionCode.str == null"> AND opertion_code is null</if>
+                </if>
+                <if test="_null.opertionSort != null">
+                 <if test="_null.opertionSort.str == null"> AND opertion_sort is null</if>
+                </if>
+                <if test="_null.opertionName != null">
+                 <if test="_null.opertionName.str == null"> AND opertion_name is null</if>
+                </if>
+                <if test="_null.opertionCondition != null">
+                 <if test="_null.opertionCondition.str == null"> AND opertion_condition is null</if>
+                </if>
+                <if test="_null.opertionFlowScore != null">
+                 <if test="_null.opertionFlowScore.str == null"> AND opertion_flow_score is null</if>
+                </if>
+                <if test="_null.opertionSkillScore != null">
+                 <if test="_null.opertionSkillScore.str == null"> AND opertion_skill_score is null</if>
+                </if>
+                <if test="_null.opertionType != null">
+                 <if test="_null.opertionType.str == null"> AND opertion_type is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.opertionCode != null">
+                 <if test="_not_null.opertionCode.str != null"> AND opertion_code is not null</if>
+                </if>
+                <if test="_not_null.opertionSort != null">
+                 <if test="_not_null.opertionSort.str != null"> AND opertion_sort is not null</if>
+                </if>
+                <if test="_not_null.opertionName != null">
+                 <if test="_not_null.opertionName.str != null"> AND opertion_name is not null</if>
+                </if>
+                <if test="_not_null.opertionCondition != null">
+                 <if test="_not_null.opertionCondition.str != null"> AND opertion_condition is not null</if>
+                </if>
+                <if test="_not_null.opertionFlowScore != null">
+                 <if test="_not_null.opertionFlowScore.str != null"> AND opertion_flow_score is not null</if>
+                </if>
+                <if test="_not_null.opertionSkillScore != null">
+                 <if test="_not_null.opertionSkillScore.str != null"> AND opertion_skill_score is not null</if>
+                </if>
+                <if test="_not_null.opertionType != null">
+                 <if test="_not_null.opertionType.str != null"> AND opertion_type is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+    </select>
+    <select id="selectOpertionInfo" parameterType="OpertionInfo" resultMap="opertionInfoResultMap">
+        SELECT <include refid="OpertionInfoColumns"/>
+        FROM tb_opertion_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="opertionCode != null">  AND opertion_code = #{opertionCode}</if>
+             <if test="opertionCode == null and _range != null and _range.opertionCode != null">
+                 <if test="_range.opertionCode.min != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCode.min}</if>
+                 <if test="_range.opertionCode.max != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCode.max}</if>
+             </if>
+             <if test="opertionCode == null and _like != null and _like.opertionCode != null">
+                 <if test="_like.opertionCode.like != null">AND opertion_code like '%${_like.opertionCode.like}%'</if>
+             </if>
+             <if test="opertionCode == null and _in != null and _in.opertionCode != null">
+                 <if test="_in.opertionCode.str != null">AND opertion_code in (${_in.opertionCode.str})</if>
+             </if>
+             <if test="opertionCode == null and _notin != null and _notin.opertionCode != null">
+                 <if test="_notin.opertionCode.str != null">AND opertion_code not in (${_notin.opertionCode.str})</if>
+             </if>
+             <if test="opertionSort != null">  AND opertion_sort = #{opertionSort}</if>
+             <if test="opertionSort == null and _range != null and _range.opertionSort != null">
+                 <if test="_range.opertionSort.min != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSort.min}</if>
+                 <if test="_range.opertionSort.max != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSort.max}</if>
+             </if>
+             <if test="opertionSort == null and _like != null and _like.opertionSort != null">
+                 <if test="_like.opertionSort.like != null">AND opertion_sort like '%${_like.opertionSort.like}%'</if>
+             </if>
+             <if test="opertionSort == null and _in != null and _in.opertionSort != null">
+                 <if test="_in.opertionSort.str != null">AND opertion_sort in (${_in.opertionSort.str})</if>
+             </if>
+             <if test="opertionSort == null and _notin != null and _notin.opertionSort != null">
+                 <if test="_notin.opertionSort.str != null">AND opertion_sort not in (${_notin.opertionSort.str})</if>
+             </if>
+             <if test="opertionName != null">  AND opertion_name = #{opertionName}</if>
+             <if test="opertionName == null and _range != null and _range.opertionName != null">
+                 <if test="_range.opertionName.min != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionName.min}</if>
+                 <if test="_range.opertionName.max != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionName.max}</if>
+             </if>
+             <if test="opertionName == null and _like != null and _like.opertionName != null">
+                 <if test="_like.opertionName.like != null">AND opertion_name like '%${_like.opertionName.like}%'</if>
+             </if>
+             <if test="opertionName == null and _in != null and _in.opertionName != null">
+                 <if test="_in.opertionName.str != null">AND opertion_name in (${_in.opertionName.str})</if>
+             </if>
+             <if test="opertionName == null and _notin != null and _notin.opertionName != null">
+                 <if test="_notin.opertionName.str != null">AND opertion_name not in (${_notin.opertionName.str})</if>
+             </if>
+             <if test="opertionCondition != null">  AND opertion_condition = #{opertionCondition}</if>
+             <if test="opertionCondition == null and _range != null and _range.opertionCondition != null">
+                 <if test="_range.opertionCondition.min != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCondition.min}</if>
+                 <if test="_range.opertionCondition.max != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCondition.max}</if>
+             </if>
+             <if test="opertionCondition == null and _like != null and _like.opertionCondition != null">
+                 <if test="_like.opertionCondition.like != null">AND opertion_condition like '%${_like.opertionCondition.like}%'</if>
+             </if>
+             <if test="opertionCondition == null and _in != null and _in.opertionCondition != null">
+                 <if test="_in.opertionCondition.str != null">AND opertion_condition in (${_in.opertionCondition.str})</if>
+             </if>
+             <if test="opertionCondition == null and _notin != null and _notin.opertionCondition != null">
+                 <if test="_notin.opertionCondition.str != null">AND opertion_condition not in (${_notin.opertionCondition.str})</if>
+             </if>
+             <if test="opertionFlowScore != null">  AND opertion_flow_score = #{opertionFlowScore}</if>
+             <if test="opertionFlowScore == null and _range != null and _range.opertionFlowScore != null">
+                 <if test="_range.opertionFlowScore.min != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionFlowScore.min}</if>
+                 <if test="_range.opertionFlowScore.max != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionFlowScore.max}</if>
+             </if>
+             <if test="opertionFlowScore == null and _like != null and _like.opertionFlowScore != null">
+                 <if test="_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_like.opertionFlowScore.like}%'</if>
+             </if>
+             <if test="opertionFlowScore == null and _in != null and _in.opertionFlowScore != null">
+                 <if test="_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionFlowScore == null and _notin != null and _notin.opertionFlowScore != null">
+                 <if test="_notin.opertionFlowScore.str != null">AND opertion_flow_score not in (${_notin.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionSkillScore != null">  AND opertion_skill_score = #{opertionSkillScore}</if>
+             <if test="opertionSkillScore == null and _range != null and _range.opertionSkillScore != null">
+                 <if test="_range.opertionSkillScore.min != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSkillScore.min}</if>
+                 <if test="_range.opertionSkillScore.max != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSkillScore.max}</if>
+             </if>
+             <if test="opertionSkillScore == null and _like != null and _like.opertionSkillScore != null">
+                 <if test="_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_like.opertionSkillScore.like}%'</if>
+             </if>
+             <if test="opertionSkillScore == null and _in != null and _in.opertionSkillScore != null">
+                 <if test="_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionSkillScore == null and _notin != null and _notin.opertionSkillScore != null">
+                 <if test="_notin.opertionSkillScore.str != null">AND opertion_skill_score not in (${_notin.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionType != null">  AND opertion_type = #{opertionType}</if>
+             <if test="opertionType == null and _range != null and _range.opertionType != null">
+                 <if test="_range.opertionType.min != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionType.min}</if>
+                 <if test="_range.opertionType.max != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionType.max}</if>
+             </if>
+             <if test="opertionType == null and _like != null and _like.opertionType != null">
+                 <if test="_like.opertionType.like != null">AND opertion_type like '%${_like.opertionType.like}%'</if>
+             </if>
+             <if test="opertionType == null and _in != null and _in.opertionType != null">
+                 <if test="_in.opertionType.str != null">AND opertion_type in (${_in.opertionType.str})</if>
+             </if>
+             <if test="opertionType == null and _notin != null and _notin.opertionType != null">
+                 <if test="_notin.opertionType.str != null">AND opertion_type not in (${_notin.opertionType.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCode != null">
+                 <if test="_or_like.opertionCode.like != null">AND opertion_code like '%${_or_like.opertionCode.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionCode != null">
+                 <if test="_or.opertionCode.str != null"> AND opertion_code = ${_or.opertionCode.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionCode != null">
+                 <if test="_or_in.opertionCode.str != null">AND opertion_code in (${_or_in.opertionCode.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionCode != null">
+                 <if test="_or_not_in.opertionCode.str != null">AND opertion_code not in (${_or_not_in.opertionCode.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSort != null">
+                 <if test="_or_like.opertionSort.like != null">AND opertion_sort like '%${_or_like.opertionSort.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionSort != null">
+                 <if test="_or.opertionSort.str != null"> AND opertion_sort = ${_or.opertionSort.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionSort != null">
+                 <if test="_or_in.opertionSort.str != null">AND opertion_sort in (${_or_in.opertionSort.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionSort != null">
+                 <if test="_or_not_in.opertionSort.str != null">AND opertion_sort not in (${_or_not_in.opertionSort.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionName != null">
+                 <if test="_or_like.opertionName.like != null">AND opertion_name like '%${_or_like.opertionName.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionName != null">
+                 <if test="_or.opertionName.str != null"> AND opertion_name = ${_or.opertionName.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionName != null">
+                 <if test="_or_in.opertionName.str != null">AND opertion_name in (${_or_in.opertionName.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionName != null">
+                 <if test="_or_not_in.opertionName.str != null">AND opertion_name not in (${_or_not_in.opertionName.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCondition != null">
+                 <if test="_or_like.opertionCondition.like != null">AND opertion_condition like '%${_or_like.opertionCondition.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionCondition != null">
+                 <if test="_or.opertionCondition.str != null"> AND opertion_condition = ${_or.opertionCondition.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionCondition != null">
+                 <if test="_or_in.opertionCondition.str != null">AND opertion_condition in (${_or_in.opertionCondition.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionCondition != null">
+                 <if test="_or_not_in.opertionCondition.str != null">AND opertion_condition not in (${_or_not_in.opertionCondition.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionFlowScore != null">
+                 <if test="_or_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_or_like.opertionFlowScore.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionFlowScore != null">
+                 <if test="_or.opertionFlowScore.str != null"> AND opertion_flow_score = ${_or.opertionFlowScore.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionFlowScore != null">
+                 <if test="_or_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_or_in.opertionFlowScore.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionFlowScore != null">
+                 <if test="_or_not_in.opertionFlowScore.str != null">AND opertion_flow_score not in (${_or_not_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSkillScore != null">
+                 <if test="_or_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_or_like.opertionSkillScore.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionSkillScore != null">
+                 <if test="_or.opertionSkillScore.str != null"> AND opertion_skill_score = ${_or.opertionSkillScore.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionSkillScore != null">
+                 <if test="_or_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_or_in.opertionSkillScore.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionSkillScore != null">
+                 <if test="_or_not_in.opertionSkillScore.str != null">AND opertion_skill_score not in (${_or_not_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionType != null">
+                 <if test="_or_like.opertionType.like != null">AND opertion_type like '%${_or_like.opertionType.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionType != null">
+                 <if test="_or.opertionType.str != null"> AND opertion_type = ${_or.opertionType.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionType != null">
+                 <if test="_or_in.opertionType.str != null">AND opertion_type in (${_or_in.opertionType.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionType != null">
+                 <if test="_or_not_in.opertionType.str != null">AND opertion_type not in (${_or_not_in.opertionType.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.opertionCode != null">
+                 <if test="_null.opertionCode.str == null"> AND opertion_code is null</if>
+                </if>
+                <if test="_null.opertionSort != null">
+                 <if test="_null.opertionSort.str == null"> AND opertion_sort is null</if>
+                </if>
+                <if test="_null.opertionName != null">
+                 <if test="_null.opertionName.str == null"> AND opertion_name is null</if>
+                </if>
+                <if test="_null.opertionCondition != null">
+                 <if test="_null.opertionCondition.str == null"> AND opertion_condition is null</if>
+                </if>
+                <if test="_null.opertionFlowScore != null">
+                 <if test="_null.opertionFlowScore.str == null"> AND opertion_flow_score is null</if>
+                </if>
+                <if test="_null.opertionSkillScore != null">
+                 <if test="_null.opertionSkillScore.str == null"> AND opertion_skill_score is null</if>
+                </if>
+                <if test="_null.opertionType != null">
+                 <if test="_null.opertionType.str == null"> AND opertion_type is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.opertionCode != null">
+                 <if test="_not_null.opertionCode.str != null"> AND opertion_code is not null</if>
+                </if>
+                <if test="_not_null.opertionSort != null">
+                 <if test="_not_null.opertionSort.str != null"> AND opertion_sort is not null</if>
+                </if>
+                <if test="_not_null.opertionName != null">
+                 <if test="_not_null.opertionName.str != null"> AND opertion_name is not null</if>
+                </if>
+                <if test="_not_null.opertionCondition != null">
+                 <if test="_not_null.opertionCondition.str != null"> AND opertion_condition is not null</if>
+                </if>
+                <if test="_not_null.opertionFlowScore != null">
+                 <if test="_not_null.opertionFlowScore.str != null"> AND opertion_flow_score is not null</if>
+                </if>
+                <if test="_not_null.opertionSkillScore != null">
+                 <if test="_not_null.opertionSkillScore.str != null"> AND opertion_skill_score is not null</if>
+                </if>
+                <if test="_not_null.opertionType != null">
+                 <if test="_not_null.opertionType.str != null"> AND opertion_type is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+        <if test="_order != null">
+        ORDER BY
+        <foreach item="order" index="index" collection="_order" separator=",">
+        <choose>
+            <when test="order.column == 'id'">id ${order.order}</when>
+            <when test="order.column == 'opertionCode'">opertion_code ${order.order}</when>
+            <when test="order.column == 'opertionSort'">opertion_sort ${order.order}</when>
+            <when test="order.column == 'opertionName'">opertion_name ${order.order}</when>
+            <when test="order.column == 'opertionCondition'">opertion_condition ${order.order}</when>
+            <when test="order.column == 'opertionFlowScore'">opertion_flow_score ${order.order}</when>
+            <when test="order.column == 'opertionSkillScore'">opertion_skill_score ${order.order}</when>
+            <when test="order.column == 'opertionType'">opertion_type ${order.order}</when>
+            <when test="order.column == 'createrId'">creater_id ${order.order}</when>
+            <when test="order.column == 'createdAt'">created_at ${order.order}</when>
+            <when test="order.column == 'updatedAt'">updated_at ${order.order}</when>
+            <when test="order.column == 'timeStamp'">time_stamp ${order.order}</when>
+        </choose>
+        </foreach>
+        </if>
+        <if test="pageSize > 0"> LIMIT #{pageStart},#{pageSize}</if>
+    </select>
+    <select id="selectOpertionInfoByList" parameterType="arraylist" resultMap="opertionInfoResultMap">
+        SELECT <include refid="OpertionInfoColumns"/>
+        FROM tb_opertion_info
+        WHERE id IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
+    </select>
+    <select id="getOpertionInfoSearchCount" parameterType="OpertionInfo" resultType="int">
+        SELECT COUNT(*) AS cnt FROM tb_opertion_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="opertionCode != null">  AND opertion_code = #{opertionCode}</if>
+             <if test="opertionCode == null and _range != null and _range.opertionCode != null">
+                 <if test="_range.opertionCode.min != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCode.min}</if>
+                 <if test="_range.opertionCode.max != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCode.max}</if>
+             </if>
+             <if test="opertionCode == null and _like != null and _like.opertionCode != null">
+                 <if test="_like.opertionCode.like != null">AND opertion_code like '%${_like.opertionCode.like}%'</if>
+             </if>
+             <if test="opertionCode == null and _in != null and _in.opertionCode != null">
+                 <if test="_in.opertionCode.str != null">AND opertion_code in (${_in.opertionCode.str})</if>
+             </if>
+             <if test="opertionCode == null and _notin != null and _notin.opertionCode != null">
+                 <if test="_notin.opertionCode.str != null">AND opertion_code not in (${_notin.opertionCode.str})</if>
+             </if>
+             <if test="opertionSort != null">  AND opertion_sort = #{opertionSort}</if>
+             <if test="opertionSort == null and _range != null and _range.opertionSort != null">
+                 <if test="_range.opertionSort.min != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSort.min}</if>
+                 <if test="_range.opertionSort.max != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSort.max}</if>
+             </if>
+             <if test="opertionSort == null and _like != null and _like.opertionSort != null">
+                 <if test="_like.opertionSort.like != null">AND opertion_sort like '%${_like.opertionSort.like}%'</if>
+             </if>
+             <if test="opertionSort == null and _in != null and _in.opertionSort != null">
+                 <if test="_in.opertionSort.str != null">AND opertion_sort in (${_in.opertionSort.str})</if>
+             </if>
+             <if test="opertionSort == null and _notin != null and _notin.opertionSort != null">
+                 <if test="_notin.opertionSort.str != null">AND opertion_sort not in (${_notin.opertionSort.str})</if>
+             </if>
+             <if test="opertionName != null">  AND opertion_name = #{opertionName}</if>
+             <if test="opertionName == null and _range != null and _range.opertionName != null">
+                 <if test="_range.opertionName.min != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionName.min}</if>
+                 <if test="_range.opertionName.max != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionName.max}</if>
+             </if>
+             <if test="opertionName == null and _like != null and _like.opertionName != null">
+                 <if test="_like.opertionName.like != null">AND opertion_name like '%${_like.opertionName.like}%'</if>
+             </if>
+             <if test="opertionName == null and _in != null and _in.opertionName != null">
+                 <if test="_in.opertionName.str != null">AND opertion_name in (${_in.opertionName.str})</if>
+             </if>
+             <if test="opertionName == null and _notin != null and _notin.opertionName != null">
+                 <if test="_notin.opertionName.str != null">AND opertion_name not in (${_notin.opertionName.str})</if>
+             </if>
+             <if test="opertionCondition != null">  AND opertion_condition = #{opertionCondition}</if>
+             <if test="opertionCondition == null and _range != null and _range.opertionCondition != null">
+                 <if test="_range.opertionCondition.min != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCondition.min}</if>
+                 <if test="_range.opertionCondition.max != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCondition.max}</if>
+             </if>
+             <if test="opertionCondition == null and _like != null and _like.opertionCondition != null">
+                 <if test="_like.opertionCondition.like != null">AND opertion_condition like '%${_like.opertionCondition.like}%'</if>
+             </if>
+             <if test="opertionCondition == null and _in != null and _in.opertionCondition != null">
+                 <if test="_in.opertionCondition.str != null">AND opertion_condition in (${_in.opertionCondition.str})</if>
+             </if>
+             <if test="opertionCondition == null and _notin != null and _notin.opertionCondition != null">
+                 <if test="_notin.opertionCondition.str != null">AND opertion_condition not in (${_notin.opertionCondition.str})</if>
+             </if>
+             <if test="opertionFlowScore != null">  AND opertion_flow_score = #{opertionFlowScore}</if>
+             <if test="opertionFlowScore == null and _range != null and _range.opertionFlowScore != null">
+                 <if test="_range.opertionFlowScore.min != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionFlowScore.min}</if>
+                 <if test="_range.opertionFlowScore.max != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionFlowScore.max}</if>
+             </if>
+             <if test="opertionFlowScore == null and _like != null and _like.opertionFlowScore != null">
+                 <if test="_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_like.opertionFlowScore.like}%'</if>
+             </if>
+             <if test="opertionFlowScore == null and _in != null and _in.opertionFlowScore != null">
+                 <if test="_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionFlowScore == null and _notin != null and _notin.opertionFlowScore != null">
+                 <if test="_notin.opertionFlowScore.str != null">AND opertion_flow_score not in (${_notin.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionSkillScore != null">  AND opertion_skill_score = #{opertionSkillScore}</if>
+             <if test="opertionSkillScore == null and _range != null and _range.opertionSkillScore != null">
+                 <if test="_range.opertionSkillScore.min != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSkillScore.min}</if>
+                 <if test="_range.opertionSkillScore.max != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSkillScore.max}</if>
+             </if>
+             <if test="opertionSkillScore == null and _like != null and _like.opertionSkillScore != null">
+                 <if test="_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_like.opertionSkillScore.like}%'</if>
+             </if>
+             <if test="opertionSkillScore == null and _in != null and _in.opertionSkillScore != null">
+                 <if test="_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionSkillScore == null and _notin != null and _notin.opertionSkillScore != null">
+                 <if test="_notin.opertionSkillScore.str != null">AND opertion_skill_score not in (${_notin.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionType != null">  AND opertion_type = #{opertionType}</if>
+             <if test="opertionType == null and _range != null and _range.opertionType != null">
+                 <if test="_range.opertionType.min != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionType.min}</if>
+                 <if test="_range.opertionType.max != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionType.max}</if>
+             </if>
+             <if test="opertionType == null and _like != null and _like.opertionType != null">
+                 <if test="_like.opertionType.like != null">AND opertion_type like '%${_like.opertionType.like}%'</if>
+             </if>
+             <if test="opertionType == null and _in != null and _in.opertionType != null">
+                 <if test="_in.opertionType.str != null">AND opertion_type in (${_in.opertionType.str})</if>
+             </if>
+             <if test="opertionType == null and _notin != null and _notin.opertionType != null">
+                 <if test="_notin.opertionType.str != null">AND opertion_type not in (${_notin.opertionType.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCode != null">
+                 <if test="_or_like.opertionCode.like != null">AND opertion_code like '%${_or_like.opertionCode.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionCode != null">
+                 <if test="_or.opertionCode.str != null"> AND opertion_code = ${_or.opertionCode.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionCode != null">
+                 <if test="_or_in.opertionCode.str != null">AND opertion_code in (${_or_in.opertionCode.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionCode != null">
+                 <if test="_or_not_in.opertionCode.str != null">AND opertion_code not in (${_or_not_in.opertionCode.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSort != null">
+                 <if test="_or_like.opertionSort.like != null">AND opertion_sort like '%${_or_like.opertionSort.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionSort != null">
+                 <if test="_or.opertionSort.str != null"> AND opertion_sort = ${_or.opertionSort.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionSort != null">
+                 <if test="_or_in.opertionSort.str != null">AND opertion_sort in (${_or_in.opertionSort.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionSort != null">
+                 <if test="_or_not_in.opertionSort.str != null">AND opertion_sort not in (${_or_not_in.opertionSort.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionName != null">
+                 <if test="_or_like.opertionName.like != null">AND opertion_name like '%${_or_like.opertionName.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionName != null">
+                 <if test="_or.opertionName.str != null"> AND opertion_name = ${_or.opertionName.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionName != null">
+                 <if test="_or_in.opertionName.str != null">AND opertion_name in (${_or_in.opertionName.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionName != null">
+                 <if test="_or_not_in.opertionName.str != null">AND opertion_name not in (${_or_not_in.opertionName.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCondition != null">
+                 <if test="_or_like.opertionCondition.like != null">AND opertion_condition like '%${_or_like.opertionCondition.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionCondition != null">
+                 <if test="_or.opertionCondition.str != null"> AND opertion_condition = ${_or.opertionCondition.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionCondition != null">
+                 <if test="_or_in.opertionCondition.str != null">AND opertion_condition in (${_or_in.opertionCondition.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionCondition != null">
+                 <if test="_or_not_in.opertionCondition.str != null">AND opertion_condition not in (${_or_not_in.opertionCondition.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionFlowScore != null">
+                 <if test="_or_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_or_like.opertionFlowScore.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionFlowScore != null">
+                 <if test="_or.opertionFlowScore.str != null"> AND opertion_flow_score = ${_or.opertionFlowScore.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionFlowScore != null">
+                 <if test="_or_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_or_in.opertionFlowScore.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionFlowScore != null">
+                 <if test="_or_not_in.opertionFlowScore.str != null">AND opertion_flow_score not in (${_or_not_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSkillScore != null">
+                 <if test="_or_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_or_like.opertionSkillScore.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionSkillScore != null">
+                 <if test="_or.opertionSkillScore.str != null"> AND opertion_skill_score = ${_or.opertionSkillScore.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionSkillScore != null">
+                 <if test="_or_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_or_in.opertionSkillScore.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionSkillScore != null">
+                 <if test="_or_not_in.opertionSkillScore.str != null">AND opertion_skill_score not in (${_or_not_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionType != null">
+                 <if test="_or_like.opertionType.like != null">AND opertion_type like '%${_or_like.opertionType.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionType != null">
+                 <if test="_or.opertionType.str != null"> AND opertion_type = ${_or.opertionType.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionType != null">
+                 <if test="_or_in.opertionType.str != null">AND opertion_type in (${_or_in.opertionType.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionType != null">
+                 <if test="_or_not_in.opertionType.str != null">AND opertion_type not in (${_or_not_in.opertionType.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.opertionCode != null">
+                 <if test="_null.opertionCode.str == null"> AND opertion_code is null</if>
+                </if>
+                <if test="_null.opertionSort != null">
+                 <if test="_null.opertionSort.str == null"> AND opertion_sort is null</if>
+                </if>
+                <if test="_null.opertionName != null">
+                 <if test="_null.opertionName.str == null"> AND opertion_name is null</if>
+                </if>
+                <if test="_null.opertionCondition != null">
+                 <if test="_null.opertionCondition.str == null"> AND opertion_condition is null</if>
+                </if>
+                <if test="_null.opertionFlowScore != null">
+                 <if test="_null.opertionFlowScore.str == null"> AND opertion_flow_score is null</if>
+                </if>
+                <if test="_null.opertionSkillScore != null">
+                 <if test="_null.opertionSkillScore.str == null"> AND opertion_skill_score is null</if>
+                </if>
+                <if test="_null.opertionType != null">
+                 <if test="_null.opertionType.str == null"> AND opertion_type is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.opertionCode != null">
+                 <if test="_not_null.opertionCode.str != null"> AND opertion_code is not null</if>
+                </if>
+                <if test="_not_null.opertionSort != null">
+                 <if test="_not_null.opertionSort.str != null"> AND opertion_sort is not null</if>
+                </if>
+                <if test="_not_null.opertionName != null">
+                 <if test="_not_null.opertionName.str != null"> AND opertion_name is not null</if>
+                </if>
+                <if test="_not_null.opertionCondition != null">
+                 <if test="_not_null.opertionCondition.str != null"> AND opertion_condition is not null</if>
+                </if>
+                <if test="_not_null.opertionFlowScore != null">
+                 <if test="_not_null.opertionFlowScore.str != null"> AND opertion_flow_score is not null</if>
+                </if>
+                <if test="_not_null.opertionSkillScore != null">
+                 <if test="_not_null.opertionSkillScore.str != null"> AND opertion_skill_score is not null</if>
+                </if>
+                <if test="_not_null.opertionType != null">
+                 <if test="_not_null.opertionType.str != null"> AND opertion_type is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+    </select>
+    <select id="searchOpertionInfo" parameterType="OpertionInfo" resultMap="opertionInfoResultMap">
+        SELECT <include refid="OpertionInfoColumns"/>
+        FROM tb_opertion_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="opertionCode != null">  AND opertion_code = #{opertionCode}</if>
+             <if test="opertionCode == null and _range != null and _range.opertionCode != null">
+                 <if test="_range.opertionCode.min != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCode.min}</if>
+                 <if test="_range.opertionCode.max != null">AND opertion_code <choose><when test="_range.opertionCode.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCode.max}</if>
+             </if>
+             <if test="opertionCode == null and _like != null and _like.opertionCode != null">
+                 <if test="_like.opertionCode.like != null">AND opertion_code like '%${_like.opertionCode.like}%'</if>
+             </if>
+             <if test="opertionCode == null and _in != null and _in.opertionCode != null">
+                 <if test="_in.opertionCode.str != null">AND opertion_code in (${_in.opertionCode.str})</if>
+             </if>
+             <if test="opertionCode == null and _notin != null and _notin.opertionCode != null">
+                 <if test="_notin.opertionCode.str != null">AND opertion_code not in (${_notin.opertionCode.str})</if>
+             </if>
+             <if test="opertionSort != null">  AND opertion_sort = #{opertionSort}</if>
+             <if test="opertionSort == null and _range != null and _range.opertionSort != null">
+                 <if test="_range.opertionSort.min != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSort.min}</if>
+                 <if test="_range.opertionSort.max != null">AND opertion_sort <choose><when test="_range.opertionSort.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSort.max}</if>
+             </if>
+             <if test="opertionSort == null and _like != null and _like.opertionSort != null">
+                 <if test="_like.opertionSort.like != null">AND opertion_sort like '%${_like.opertionSort.like}%'</if>
+             </if>
+             <if test="opertionSort == null and _in != null and _in.opertionSort != null">
+                 <if test="_in.opertionSort.str != null">AND opertion_sort in (${_in.opertionSort.str})</if>
+             </if>
+             <if test="opertionSort == null and _notin != null and _notin.opertionSort != null">
+                 <if test="_notin.opertionSort.str != null">AND opertion_sort not in (${_notin.opertionSort.str})</if>
+             </if>
+             <if test="opertionName != null">  AND opertion_name = #{opertionName}</if>
+             <if test="opertionName == null and _range != null and _range.opertionName != null">
+                 <if test="_range.opertionName.min != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionName.min}</if>
+                 <if test="_range.opertionName.max != null">AND opertion_name <choose><when test="_range.opertionName.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionName.max}</if>
+             </if>
+             <if test="opertionName == null and _like != null and _like.opertionName != null">
+                 <if test="_like.opertionName.like != null">AND opertion_name like '%${_like.opertionName.like}%'</if>
+             </if>
+             <if test="opertionName == null and _in != null and _in.opertionName != null">
+                 <if test="_in.opertionName.str != null">AND opertion_name in (${_in.opertionName.str})</if>
+             </if>
+             <if test="opertionName == null and _notin != null and _notin.opertionName != null">
+                 <if test="_notin.opertionName.str != null">AND opertion_name not in (${_notin.opertionName.str})</if>
+             </if>
+             <if test="opertionCondition != null">  AND opertion_condition = #{opertionCondition}</if>
+             <if test="opertionCondition == null and _range != null and _range.opertionCondition != null">
+                 <if test="_range.opertionCondition.min != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionCondition.min}</if>
+                 <if test="_range.opertionCondition.max != null">AND opertion_condition <choose><when test="_range.opertionCondition.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionCondition.max}</if>
+             </if>
+             <if test="opertionCondition == null and _like != null and _like.opertionCondition != null">
+                 <if test="_like.opertionCondition.like != null">AND opertion_condition like '%${_like.opertionCondition.like}%'</if>
+             </if>
+             <if test="opertionCondition == null and _in != null and _in.opertionCondition != null">
+                 <if test="_in.opertionCondition.str != null">AND opertion_condition in (${_in.opertionCondition.str})</if>
+             </if>
+             <if test="opertionCondition == null and _notin != null and _notin.opertionCondition != null">
+                 <if test="_notin.opertionCondition.str != null">AND opertion_condition not in (${_notin.opertionCondition.str})</if>
+             </if>
+             <if test="opertionFlowScore != null">  AND opertion_flow_score = #{opertionFlowScore}</if>
+             <if test="opertionFlowScore == null and _range != null and _range.opertionFlowScore != null">
+                 <if test="_range.opertionFlowScore.min != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionFlowScore.min}</if>
+                 <if test="_range.opertionFlowScore.max != null">AND opertion_flow_score <choose><when test="_range.opertionFlowScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionFlowScore.max}</if>
+             </if>
+             <if test="opertionFlowScore == null and _like != null and _like.opertionFlowScore != null">
+                 <if test="_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_like.opertionFlowScore.like}%'</if>
+             </if>
+             <if test="opertionFlowScore == null and _in != null and _in.opertionFlowScore != null">
+                 <if test="_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionFlowScore == null and _notin != null and _notin.opertionFlowScore != null">
+                 <if test="_notin.opertionFlowScore.str != null">AND opertion_flow_score not in (${_notin.opertionFlowScore.str})</if>
+             </if>
+             <if test="opertionSkillScore != null">  AND opertion_skill_score = #{opertionSkillScore}</if>
+             <if test="opertionSkillScore == null and _range != null and _range.opertionSkillScore != null">
+                 <if test="_range.opertionSkillScore.min != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionSkillScore.min}</if>
+                 <if test="_range.opertionSkillScore.max != null">AND opertion_skill_score <choose><when test="_range.opertionSkillScore.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionSkillScore.max}</if>
+             </if>
+             <if test="opertionSkillScore == null and _like != null and _like.opertionSkillScore != null">
+                 <if test="_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_like.opertionSkillScore.like}%'</if>
+             </if>
+             <if test="opertionSkillScore == null and _in != null and _in.opertionSkillScore != null">
+                 <if test="_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionSkillScore == null and _notin != null and _notin.opertionSkillScore != null">
+                 <if test="_notin.opertionSkillScore.str != null">AND opertion_skill_score not in (${_notin.opertionSkillScore.str})</if>
+             </if>
+             <if test="opertionType != null">  AND opertion_type = #{opertionType}</if>
+             <if test="opertionType == null and _range != null and _range.opertionType != null">
+                 <if test="_range.opertionType.min != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.opertionType.min}</if>
+                 <if test="_range.opertionType.max != null">AND opertion_type <choose><when test="_range.opertionType.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.opertionType.max}</if>
+             </if>
+             <if test="opertionType == null and _like != null and _like.opertionType != null">
+                 <if test="_like.opertionType.like != null">AND opertion_type like '%${_like.opertionType.like}%'</if>
+             </if>
+             <if test="opertionType == null and _in != null and _in.opertionType != null">
+                 <if test="_in.opertionType.str != null">AND opertion_type in (${_in.opertionType.str})</if>
+             </if>
+             <if test="opertionType == null and _notin != null and _notin.opertionType != null">
+                 <if test="_notin.opertionType.str != null">AND opertion_type not in (${_notin.opertionType.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCode != null">
+                 <if test="_or_like.opertionCode.like != null">AND opertion_code like '%${_or_like.opertionCode.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionCode != null">
+                 <if test="_or.opertionCode.str != null"> AND opertion_code = ${_or.opertionCode.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionCode != null">
+                 <if test="_or_in.opertionCode.str != null">AND opertion_code in (${_or_in.opertionCode.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionCode != null">
+                 <if test="_or_not_in.opertionCode.str != null">AND opertion_code not in (${_or_not_in.opertionCode.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSort != null">
+                 <if test="_or_like.opertionSort.like != null">AND opertion_sort like '%${_or_like.opertionSort.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionSort != null">
+                 <if test="_or.opertionSort.str != null"> AND opertion_sort = ${_or.opertionSort.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionSort != null">
+                 <if test="_or_in.opertionSort.str != null">AND opertion_sort in (${_or_in.opertionSort.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionSort != null">
+                 <if test="_or_not_in.opertionSort.str != null">AND opertion_sort not in (${_or_not_in.opertionSort.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionName != null">
+                 <if test="_or_like.opertionName.like != null">AND opertion_name like '%${_or_like.opertionName.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionName != null">
+                 <if test="_or.opertionName.str != null"> AND opertion_name = ${_or.opertionName.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionName != null">
+                 <if test="_or_in.opertionName.str != null">AND opertion_name in (${_or_in.opertionName.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionName != null">
+                 <if test="_or_not_in.opertionName.str != null">AND opertion_name not in (${_or_not_in.opertionName.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionCondition != null">
+                 <if test="_or_like.opertionCondition.like != null">AND opertion_condition like '%${_or_like.opertionCondition.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionCondition != null">
+                 <if test="_or.opertionCondition.str != null"> AND opertion_condition = ${_or.opertionCondition.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionCondition != null">
+                 <if test="_or_in.opertionCondition.str != null">AND opertion_condition in (${_or_in.opertionCondition.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionCondition != null">
+                 <if test="_or_not_in.opertionCondition.str != null">AND opertion_condition not in (${_or_not_in.opertionCondition.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionFlowScore != null">
+                 <if test="_or_like.opertionFlowScore.like != null">AND opertion_flow_score like '%${_or_like.opertionFlowScore.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionFlowScore != null">
+                 <if test="_or.opertionFlowScore.str != null"> AND opertion_flow_score = ${_or.opertionFlowScore.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionFlowScore != null">
+                 <if test="_or_in.opertionFlowScore.str != null">AND opertion_flow_score in (${_or_in.opertionFlowScore.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionFlowScore != null">
+                 <if test="_or_not_in.opertionFlowScore.str != null">AND opertion_flow_score not in (${_or_not_in.opertionFlowScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionSkillScore != null">
+                 <if test="_or_like.opertionSkillScore.like != null">AND opertion_skill_score like '%${_or_like.opertionSkillScore.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionSkillScore != null">
+                 <if test="_or.opertionSkillScore.str != null"> AND opertion_skill_score = ${_or.opertionSkillScore.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionSkillScore != null">
+                 <if test="_or_in.opertionSkillScore.str != null">AND opertion_skill_score in (${_or_in.opertionSkillScore.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionSkillScore != null">
+                 <if test="_or_not_in.opertionSkillScore.str != null">AND opertion_skill_score not in (${_or_not_in.opertionSkillScore.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.opertionType != null">
+                 <if test="_or_like.opertionType.like != null">AND opertion_type like '%${_or_like.opertionType.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.opertionType != null">
+                 <if test="_or.opertionType.str != null"> AND opertion_type = ${_or.opertionType.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.opertionType != null">
+                 <if test="_or_in.opertionType.str != null">AND opertion_type in (${_or_in.opertionType.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.opertionType != null">
+                 <if test="_or_not_in.opertionType.str != null">AND opertion_type not in (${_or_not_in.opertionType.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.opertionCode != null">
+                 <if test="_null.opertionCode.str == null"> AND opertion_code is null</if>
+                </if>
+                <if test="_null.opertionSort != null">
+                 <if test="_null.opertionSort.str == null"> AND opertion_sort is null</if>
+                </if>
+                <if test="_null.opertionName != null">
+                 <if test="_null.opertionName.str == null"> AND opertion_name is null</if>
+                </if>
+                <if test="_null.opertionCondition != null">
+                 <if test="_null.opertionCondition.str == null"> AND opertion_condition is null</if>
+                </if>
+                <if test="_null.opertionFlowScore != null">
+                 <if test="_null.opertionFlowScore.str == null"> AND opertion_flow_score is null</if>
+                </if>
+                <if test="_null.opertionSkillScore != null">
+                 <if test="_null.opertionSkillScore.str == null"> AND opertion_skill_score is null</if>
+                </if>
+                <if test="_null.opertionType != null">
+                 <if test="_null.opertionType.str == null"> AND opertion_type is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.opertionCode != null">
+                 <if test="_not_null.opertionCode.str != null"> AND opertion_code is not null</if>
+                </if>
+                <if test="_not_null.opertionSort != null">
+                 <if test="_not_null.opertionSort.str != null"> AND opertion_sort is not null</if>
+                </if>
+                <if test="_not_null.opertionName != null">
+                 <if test="_not_null.opertionName.str != null"> AND opertion_name is not null</if>
+                </if>
+                <if test="_not_null.opertionCondition != null">
+                 <if test="_not_null.opertionCondition.str != null"> AND opertion_condition is not null</if>
+                </if>
+                <if test="_not_null.opertionFlowScore != null">
+                 <if test="_not_null.opertionFlowScore.str != null"> AND opertion_flow_score is not null</if>
+                </if>
+                <if test="_not_null.opertionSkillScore != null">
+                 <if test="_not_null.opertionSkillScore.str != null"> AND opertion_skill_score is not null</if>
+                </if>
+                <if test="_not_null.opertionType != null">
+                 <if test="_not_null.opertionType.str != null"> AND opertion_type is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+        <if test="_order != null">
+        ORDER BY
+        <foreach item="order" index="index" collection="_order" separator=",">
+        <choose>
+            <when test="order.column == 'id'">id ${order.order}</when>
+            <when test="order.column == 'opertionCode'">opertion_code ${order.order}</when>
+            <when test="order.column == 'opertionSort'">opertion_sort ${order.order}</when>
+            <when test="order.column == 'opertionName'">opertion_name ${order.order}</when>
+            <when test="order.column == 'opertionCondition'">opertion_condition ${order.order}</when>
+            <when test="order.column == 'opertionFlowScore'">opertion_flow_score ${order.order}</when>
+            <when test="order.column == 'opertionSkillScore'">opertion_skill_score ${order.order}</when>
+            <when test="order.column == 'opertionType'">opertion_type ${order.order}</when>
+            <when test="order.column == 'createrId'">creater_id ${order.order}</when>
+            <when test="order.column == 'createdAt'">created_at ${order.order}</when>
+            <when test="order.column == 'updatedAt'">updated_at ${order.order}</when>
+            <when test="order.column == 'timeStamp'">time_stamp ${order.order}</when>
+        </choose>
+        </foreach>
+        </if>
+        <if test="pageSize > 0"> LIMIT #{pageStart},#{pageSize}</if>
+    </select>
+</mapper>

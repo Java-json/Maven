@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tgb.data.IUserInfoData">
+    <resultMap id="userInfoResultMap" type="com.tgb.model.UserInfo">
+        <result property="id" column="id" />
+        <result property="userCode" column="user_code" />
+        <result property="parentId" column="parent_id" />
+        <result property="userAccount" column="user_account" />
+        <result property="password" column="password" />
+        <result property="rememberToken" column="remember_token" />
+        <result property="userPhoto" column="user_photo" />
+        <result property="userNickName" column="user_nick_name" />
+        <result property="userCnName" column="user_cn_name" />
+        <result property="userEnName" column="user_en_name" />
+        <result property="userSex" column="user_sex" />
+        <result property="userAge" column="user_age" />
+        <result property="userBirthDay" column="user_birth_day"  javaType="String" jdbcType="DATE"/>
+        <result property="userWorkDay" column="user_work_day"  javaType="String" jdbcType="DATE"/>
+        <result property="userLevel" column="user_level" />
+        <result property="userIp" column="user_ip" />
+        <result property="userPhone" column="user_phone" />
+        <result property="userMobile" column="user_mobile" />
+        <result property="userEmail" column="user_email" />
+        <result property="userQq" column="user_qq" />
+        <result property="userAddress" column="user_address" />
+        <result property="userEcode" column="user_ecode" />
+        <result property="userMark" column="user_mark" />
+        <result property="userIdcard" column="user_idcard" />
+        <result property="userIdcardType" column="user_idcard_type" />
+        <result property="userRoleId" column="user_role_id" />
+        <result property="userClassId" column="user_class_id" />
+        <result property="userStatus" column="user_status" />
+        <result property="userOnline" column="user_online" />
+        <result property="createrId" column="creater_id" />
+        <result property="createdAt" column="created_at" />
+        <result property="updatedAt" column="updated_at" />
+        <result property="timeStamp" column="time_stamp" />
+    </resultMap>
+    <sql id="UserInfoColumns"> id,user_code,parent_id,user_account,password,remember_token,user_photo,user_nick_name,user_cn_name,user_en_name,user_sex,user_age,user_birth_day,user_work_day,user_level,user_ip,user_phone,user_mobile,user_email,user_qq,user_address,user_ecode,user_mark,user_idcard,user_idcard_type,user_role_id,user_class_id,user_status,user_online,creater_id,created_at,updated_at,time_stamp </sql>
+    <insert id="insertUserInfo" parameterType="UserInfo" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO tb_user_info(
+        
+        ) VALUES (
+        
+        )
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+        SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+    </insert>
+    
+    <select id="selectUserList" resultMap="userInfoResultMap">
+    	select * from tb_user_info
+    </select>
+    
+</mapper>

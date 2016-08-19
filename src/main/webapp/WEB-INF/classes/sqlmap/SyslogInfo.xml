@@ -1,0 +1,1939 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.honglian.data.ISyslogInfoData">
+    <resultMap id="syslogInfoResultMap" type="com.honglian.model.SyslogInfo">
+        <result property="id" column="id" />
+        <result property="logAction" column="log_action" />
+        <result property="logRoute" column="log_route" />
+        <result property="logIp" column="log_ip" />
+        <result property="logMark" column="log_mark" />
+        <result property="createrId" column="creater_id" />
+        <result property="createdAt" column="created_at" />
+        <result property="updatedAt" column="updated_at" />
+        <result property="timeStamp" column="time_stamp" />
+    </resultMap>
+    <sql id="SyslogInfoColumns"> id,log_action,log_route,log_ip,log_mark,creater_id,created_at,updated_at,time_stamp </sql>
+    <insert id="insertSyslogInfo" parameterType="SyslogInfo" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO tb_syslog_info(
+        <trim suffixOverrides=",">
+             id
+             <if test="logAction != null">,log_action</if>
+             <if test="logRoute != null">,log_route</if>
+             <if test="logIp != null">,log_ip</if>
+             <if test="logMark != null">,log_mark</if>
+             <if test="createrId != null">,creater_id</if>
+             <if test="createdAt != null">,created_at</if>
+             <if test="updatedAt != null">,updated_at</if>
+             <if test="timeStamp != null">,time_stamp</if>
+        </trim>
+        ) VALUES (
+        <trim suffixOverrides=",">
+             NULL
+             <if test="logAction != null">,#{logAction}</if>
+             <if test="logRoute != null">,#{logRoute}</if>
+             <if test="logIp != null">,#{logIp}</if>
+             <if test="logMark != null">,#{logMark}</if>
+             <if test="createrId != null">,#{createrId}</if>
+             <if test="createdAt != null">,#{createdAt}</if>
+             <if test="updatedAt != null">,#{updatedAt}</if>
+             <if test="timeStamp != null">,#{timeStamp}</if>
+        </trim>
+        )
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+        SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+    </insert>
+    <update id="updateSyslogInfo" parameterType="SyslogInfo">
+        UPDATE tb_syslog_info
+        <set>
+             <if test="logAction != null">log_action = #{logAction},</if>
+             <if test="logRoute != null">log_route = #{logRoute},</if>
+             <if test="logIp != null">log_ip = #{logIp},</if>
+             <if test="logMark != null">log_mark = #{logMark},</if>
+             <if test="createrId != null">creater_id = #{createrId},</if>
+             <if test="createdAt != null">created_at = #{createdAt},</if>
+             <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+             <if test="timeStamp != null">time_stamp = #{timeStamp}</if>
+        </set>
+        WHERE id = #{id} LIMIT 1
+    </update>
+    <delete id="deleteSyslogInfo" parameterType="SyslogInfo">
+        DELETE FROM tb_syslog_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="logAction != null">  AND log_action = #{logAction}</if>
+             <if test="logAction == null and _range != null and _range.logAction != null">
+                 <if test="_range.logAction.min != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logAction.min}</if>
+                 <if test="_range.logAction.max != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logAction.max}</if>
+             </if>
+             <if test="logAction == null and _like != null and _like.logAction != null">
+                 <if test="_like.logAction.like != null">AND log_action like '%${_like.logAction.like}%'</if>
+             </if>
+             <if test="logAction == null and _in != null and _in.logAction != null">
+                 <if test="_in.logAction.str != null">AND log_action in (${_in.logAction.str})</if>
+             </if>
+             <if test="logAction == null and _notin != null and _notin.logAction != null">
+                 <if test="_notin.logAction.str != null">AND log_action not in (${_notin.logAction.str})</if>
+             </if>
+             <if test="logRoute != null">  AND log_route = #{logRoute}</if>
+             <if test="logRoute == null and _range != null and _range.logRoute != null">
+                 <if test="_range.logRoute.min != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logRoute.min}</if>
+                 <if test="_range.logRoute.max != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logRoute.max}</if>
+             </if>
+             <if test="logRoute == null and _like != null and _like.logRoute != null">
+                 <if test="_like.logRoute.like != null">AND log_route like '%${_like.logRoute.like}%'</if>
+             </if>
+             <if test="logRoute == null and _in != null and _in.logRoute != null">
+                 <if test="_in.logRoute.str != null">AND log_route in (${_in.logRoute.str})</if>
+             </if>
+             <if test="logRoute == null and _notin != null and _notin.logRoute != null">
+                 <if test="_notin.logRoute.str != null">AND log_route not in (${_notin.logRoute.str})</if>
+             </if>
+             <if test="logIp != null">  AND log_ip = #{logIp}</if>
+             <if test="logIp == null and _range != null and _range.logIp != null">
+                 <if test="_range.logIp.min != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logIp.min}</if>
+                 <if test="_range.logIp.max != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logIp.max}</if>
+             </if>
+             <if test="logIp == null and _like != null and _like.logIp != null">
+                 <if test="_like.logIp.like != null">AND log_ip like '%${_like.logIp.like}%'</if>
+             </if>
+             <if test="logIp == null and _in != null and _in.logIp != null">
+                 <if test="_in.logIp.str != null">AND log_ip in (${_in.logIp.str})</if>
+             </if>
+             <if test="logIp == null and _notin != null and _notin.logIp != null">
+                 <if test="_notin.logIp.str != null">AND log_ip not in (${_notin.logIp.str})</if>
+             </if>
+             <if test="logMark != null">  AND log_mark = #{logMark}</if>
+             <if test="logMark == null and _range != null and _range.logMark != null">
+                 <if test="_range.logMark.min != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logMark.min}</if>
+                 <if test="_range.logMark.max != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logMark.max}</if>
+             </if>
+             <if test="logMark == null and _like != null and _like.logMark != null">
+                 <if test="_like.logMark.like != null">AND log_mark like '%${_like.logMark.like}%'</if>
+             </if>
+             <if test="logMark == null and _in != null and _in.logMark != null">
+                 <if test="_in.logMark.str != null">AND log_mark in (${_in.logMark.str})</if>
+             </if>
+             <if test="logMark == null and _notin != null and _notin.logMark != null">
+                 <if test="_notin.logMark.str != null">AND log_mark not in (${_notin.logMark.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test="_or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logAction != null">
+                 <if test="_or_like.logAction.like != null">AND log_action like '%${_or_like.logAction.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logAction != null">
+                 <if test="_or.logAction.str != null"> AND log_action = ${_or.logAction.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logAction != null">
+                 <if test="_or_in.logAction.str != null">AND log_action in (${_or_in.logAction.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logAction != null">
+                 <if test="_or_not_in.logAction.str != null">AND log_action not in (${_or_not_in.logAction.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logRoute != null">
+                 <if test="_or_like.logRoute.like != null">AND log_route like '%${_or_like.logRoute.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logRoute != null">
+                 <if test="_or.logRoute.str != null"> AND log_route = ${_or.logRoute.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logRoute != null">
+                 <if test="_or_in.logRoute.str != null">AND log_route in (${_or_in.logRoute.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logRoute != null">
+                 <if test="_or_not_in.logRoute.str != null">AND log_route not in (${_or_not_in.logRoute.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logIp != null">
+                 <if test="_or_like.logIp.like != null">AND log_ip like '%${_or_like.logIp.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logIp != null">
+                 <if test="_or.logIp.str != null"> AND log_ip = ${_or.logIp.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logIp != null">
+                 <if test="_or_in.logIp.str != null">AND log_ip in (${_or_in.logIp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logIp != null">
+                 <if test="_or_not_in.logIp.str != null">AND log_ip not in (${_or_not_in.logIp.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logMark != null">
+                 <if test="_or_like.logMark.like != null">AND log_mark like '%${_or_like.logMark.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logMark != null">
+                 <if test="_or.logMark.str != null"> AND log_mark = ${_or.logMark.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logMark != null">
+                 <if test="_or_in.logMark.str != null">AND log_mark in (${_or_in.logMark.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logMark != null">
+                 <if test="_or_not_in.logMark.str != null">AND log_mark not in (${_or_not_in.logMark.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test="_or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.logAction != null">
+                 <if test="_null.logAction.str == null"> AND log_action is null</if>
+                </if>
+                <if test="_null.logRoute != null">
+                 <if test="_null.logRoute.str == null"> AND log_route is null</if>
+                </if>
+                <if test="_null.logIp != null">
+                 <if test="_null.logIp.str == null"> AND log_ip is null</if>
+                </if>
+                <if test="_null.logMark != null">
+                 <if test="_null.logMark.str == null"> AND log_mark is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.logAction != null">
+                 <if test="_not_null.logAction.str != null"> AND log_action is not null</if>
+                </if>
+                <if test="_not_null.logRoute != null">
+                 <if test="_not_null.logRoute.str != null"> AND log_route is not null</if>
+                </if>
+                <if test="_not_null.logIp != null">
+                 <if test="_not_null.logIp.str != null"> AND log_ip is not null</if>
+                </if>
+                <if test="_not_null.logMark != null">
+                 <if test="_not_null.logMark.str != null"> AND log_mark is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+    </delete>
+    <select id="getSyslogInfo" parameterType="SyslogInfo" resultMap="syslogInfoResultMap">
+        SELECT * FROM tb_syslog_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="logAction != null">  AND log_action = #{logAction}</if>
+             <if test="logAction == null and _range != null and _range.logAction != null">
+                 <if test="_range.logAction.min != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logAction.min}</if>
+                 <if test="_range.logAction.max != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logAction.max}</if>
+             </if>
+             <if test="logAction == null and _like != null and _like.logAction != null">
+                 <if test="_like.logAction.like != null">AND log_action like '%${_like.logAction.like}%'</if>
+             </if>
+             <if test="logAction == null and _in != null and _in.logAction != null">
+                 <if test="_in.logAction.str != null">AND log_action in (${_in.logAction.str})</if>
+             </if>
+             <if test="logAction == null and _notin != null and _notin.logAction != null">
+                 <if test="_notin.logAction.str != null">AND log_action not in (${_notin.logAction.str})</if>
+             </if>
+             <if test="logRoute != null">  AND log_route = #{logRoute}</if>
+             <if test="logRoute == null and _range != null and _range.logRoute != null">
+                 <if test="_range.logRoute.min != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logRoute.min}</if>
+                 <if test="_range.logRoute.max != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logRoute.max}</if>
+             </if>
+             <if test="logRoute == null and _like != null and _like.logRoute != null">
+                 <if test="_like.logRoute.like != null">AND log_route like '%${_like.logRoute.like}%'</if>
+             </if>
+             <if test="logRoute == null and _in != null and _in.logRoute != null">
+                 <if test="_in.logRoute.str != null">AND log_route in (${_in.logRoute.str})</if>
+             </if>
+             <if test="logRoute == null and _notin != null and _notin.logRoute != null">
+                 <if test="_notin.logRoute.str != null">AND log_route not in (${_notin.logRoute.str})</if>
+             </if>
+             <if test="logIp != null">  AND log_ip = #{logIp}</if>
+             <if test="logIp == null and _range != null and _range.logIp != null">
+                 <if test="_range.logIp.min != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logIp.min}</if>
+                 <if test="_range.logIp.max != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logIp.max}</if>
+             </if>
+             <if test="logIp == null and _like != null and _like.logIp != null">
+                 <if test="_like.logIp.like != null">AND log_ip like '%${_like.logIp.like}%'</if>
+             </if>
+             <if test="logIp == null and _in != null and _in.logIp != null">
+                 <if test="_in.logIp.str != null">AND log_ip in (${_in.logIp.str})</if>
+             </if>
+             <if test="logIp == null and _notin != null and _notin.logIp != null">
+                 <if test="_notin.logIp.str != null">AND log_ip not in (${_notin.logIp.str})</if>
+             </if>
+             <if test="logMark != null">  AND log_mark = #{logMark}</if>
+             <if test="logMark == null and _range != null and _range.logMark != null">
+                 <if test="_range.logMark.min != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logMark.min}</if>
+                 <if test="_range.logMark.max != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logMark.max}</if>
+             </if>
+             <if test="logMark == null and _like != null and _like.logMark != null">
+                 <if test="_like.logMark.like != null">AND log_mark like '%${_like.logMark.like}%'</if>
+             </if>
+             <if test="logMark == null and _in != null and _in.logMark != null">
+                 <if test="_in.logMark.str != null">AND log_mark in (${_in.logMark.str})</if>
+             </if>
+             <if test="logMark == null and _notin != null and _notin.logMark != null">
+                 <if test="_notin.logMark.str != null">AND log_mark not in (${_notin.logMark.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test="_or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logAction != null">
+                 <if test="_or_like.logAction.like != null">AND log_action like '%${_or_like.logAction.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logAction != null">
+                 <if test="_or.logAction.str != null"> AND log_action = ${_or.logAction.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logAction != null">
+                 <if test="_or_in.logAction.str != null">AND log_action in (${_or_in.logAction.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.logAction != null">
+                 <if test="_or_not_in.logAction.str != null">AND log_action not in (${_or_not_in.logAction.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logRoute != null">
+                 <if test="_or_like.logRoute.like != null">AND log_route like '%${_or_like.logRoute.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logRoute != null">
+                 <if test="_or.logRoute.str != null"> AND log_route = ${_or.logRoute.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logRoute != null">
+                 <if test="_or_in.logRoute.str != null">AND log_route in (${_or_in.logRoute.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.logRoute != null">
+                 <if test="_or_not_in.logRoute.str != null">AND log_route not in (${_or_not_in.logRoute.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logIp != null">
+                 <if test="_or_like.logIp.like != null">AND log_ip like '%${_or_like.logIp.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logIp != null">
+                 <if test="_or.logIp.str != null"> AND log_ip = ${_or.logIp.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logIp != null">
+                 <if test="_or_in.logIp.str != null">AND log_ip in (${_or_in.logIp.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.logIp != null">
+                 <if test="_or_not_in.logIp.str != null">AND log_ip not in (${_or_not_in.logIp.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logMark != null">
+                 <if test="_or_like.logMark.like != null">AND log_mark like '%${_or_like.logMark.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logMark != null">
+                 <if test="_or.logMark.str != null"> AND log_mark = ${_or.logMark.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logMark != null">
+                 <if test="_or_in.logMark.str != null">AND log_mark in (${_or_in.logMark.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.logMark != null">
+                 <if test="_or_not_in.logMark.str != null">AND log_mark not in (${_or_not_in.logMark.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test="_or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.logAction != null">
+                 <if test="_null.logAction.str == null"> AND log_action is null</if>
+                </if>
+                <if test="_null.logRoute != null">
+                 <if test="_null.logRoute.str == null"> AND log_route is null</if>
+                </if>
+                <if test="_null.logIp != null">
+                 <if test="_null.logIp.str == null"> AND log_ip is null</if>
+                </if>
+                <if test="_null.logMark != null">
+                 <if test="_null.logMark.str == null"> AND log_mark is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.logAction != null">
+                 <if test="_not_null.logAction.str != null"> AND log_action is not null</if>
+                </if>
+                <if test="_not_null.logRoute != null">
+                 <if test="_not_null.logRoute.str != null"> AND log_route is not null</if>
+                </if>
+                <if test="_not_null.logIp != null">
+                 <if test="_not_null.logIp.str != null"> AND log_ip is not null</if>
+                </if>
+                <if test="_not_null.logMark != null">
+                 <if test="_not_null.logMark.str != null"> AND log_mark is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+    </select>
+    <select id="getSyslogInfoCount" parameterType="SyslogInfo" resultType="int">
+        SELECT COUNT(*) AS cnt FROM tb_syslog_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="logAction != null">  AND log_action = #{logAction}</if>
+             <if test="logAction == null and _range != null and _range.logAction != null">
+                 <if test="_range.logAction.min != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logAction.min}</if>
+                 <if test="_range.logAction.max != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logAction.max}</if>
+             </if>
+             <if test="logAction == null and _like != null and _like.logAction != null">
+                 <if test="_like.logAction.like != null">AND log_action like '%${_like.logAction.like}%'</if>
+             </if>
+             <if test="logAction == null and _in != null and _in.logAction != null">
+                 <if test="_in.logAction.str != null">AND log_action in (${_in.logAction.str})</if>
+             </if>
+             <if test="logAction == null and _notin != null and _notin.logAction != null">
+                 <if test="_notin.logAction.str != null">AND log_action not in (${_notin.logAction.str})</if>
+             </if>
+             <if test="logRoute != null">  AND log_route = #{logRoute}</if>
+             <if test="logRoute == null and _range != null and _range.logRoute != null">
+                 <if test="_range.logRoute.min != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logRoute.min}</if>
+                 <if test="_range.logRoute.max != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logRoute.max}</if>
+             </if>
+             <if test="logRoute == null and _like != null and _like.logRoute != null">
+                 <if test="_like.logRoute.like != null">AND log_route like '%${_like.logRoute.like}%'</if>
+             </if>
+             <if test="logRoute == null and _in != null and _in.logRoute != null">
+                 <if test="_in.logRoute.str != null">AND log_route in (${_in.logRoute.str})</if>
+             </if>
+             <if test="logRoute == null and _notin != null and _notin.logRoute != null">
+                 <if test="_notin.logRoute.str != null">AND log_route not in (${_notin.logRoute.str})</if>
+             </if>
+             <if test="logIp != null">  AND log_ip = #{logIp}</if>
+             <if test="logIp == null and _range != null and _range.logIp != null">
+                 <if test="_range.logIp.min != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logIp.min}</if>
+                 <if test="_range.logIp.max != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logIp.max}</if>
+             </if>
+             <if test="logIp == null and _like != null and _like.logIp != null">
+                 <if test="_like.logIp.like != null">AND log_ip like '%${_like.logIp.like}%'</if>
+             </if>
+             <if test="logIp == null and _in != null and _in.logIp != null">
+                 <if test="_in.logIp.str != null">AND log_ip in (${_in.logIp.str})</if>
+             </if>
+             <if test="logIp == null and _notin != null and _notin.logIp != null">
+                 <if test="_notin.logIp.str != null">AND log_ip not in (${_notin.logIp.str})</if>
+             </if>
+             <if test="logMark != null">  AND log_mark = #{logMark}</if>
+             <if test="logMark == null and _range != null and _range.logMark != null">
+                 <if test="_range.logMark.min != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logMark.min}</if>
+                 <if test="_range.logMark.max != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logMark.max}</if>
+             </if>
+             <if test="logMark == null and _like != null and _like.logMark != null">
+                 <if test="_like.logMark.like != null">AND log_mark like '%${_like.logMark.like}%'</if>
+             </if>
+             <if test="logMark == null and _in != null and _in.logMark != null">
+                 <if test="_in.logMark.str != null">AND log_mark in (${_in.logMark.str})</if>
+             </if>
+             <if test="logMark == null and _notin != null and _notin.logMark != null">
+                 <if test="_notin.logMark.str != null">AND log_mark not in (${_notin.logMark.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test="_or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logAction != null">
+                 <if test="_or_like.logAction.like != null">AND log_action like '%${_or_like.logAction.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logAction != null">
+                 <if test="_or.logAction.str != null"> AND log_action = ${_or.logAction.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logAction != null">
+                 <if test="_or_in.logAction.str != null">AND log_action in (${_or_in.logAction.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.logAction != null">
+                 <if test="_or_not_in.logAction.str != null">AND log_action not in (${_or_not_in.logAction.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logRoute != null">
+                 <if test="_or_like.logRoute.like != null">AND log_route like '%${_or_like.logRoute.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logRoute != null">
+                 <if test="_or.logRoute.str != null"> AND log_route = ${_or.logRoute.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logRoute != null">
+                 <if test="_or_in.logRoute.str != null">AND log_route in (${_or_in.logRoute.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.logRoute != null">
+                 <if test="_or_not_in.logRoute.str != null">AND log_route not in (${_or_not_in.logRoute.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logIp != null">
+                 <if test="_or_like.logIp.like != null">AND log_ip like '%${_or_like.logIp.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logIp != null">
+                 <if test="_or.logIp.str != null"> AND log_ip = ${_or.logIp.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logIp != null">
+                 <if test="_or_in.logIp.str != null">AND log_ip in (${_or_in.logIp.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.logIp != null">
+                 <if test="_or_not_in.logIp.str != null">AND log_ip not in (${_or_not_in.logIp.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logMark != null">
+                 <if test="_or_like.logMark.like != null">AND log_mark like '%${_or_like.logMark.like}%'</if>
+             </if>
+                <if test="_or != null and _or.logMark != null">
+                 <if test="_or.logMark.str != null"> AND log_mark = ${_or.logMark.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.logMark != null">
+                 <if test="_or_in.logMark.str != null">AND log_mark in (${_or_in.logMark.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.logMark != null">
+                 <if test="_or_not_in.logMark.str != null">AND log_mark not in (${_or_not_in.logMark.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test="_or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test="_or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test="_or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test="_or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.logAction != null">
+                 <if test="_null.logAction.str == null"> AND log_action is null</if>
+                </if>
+                <if test="_null.logRoute != null">
+                 <if test="_null.logRoute.str == null"> AND log_route is null</if>
+                </if>
+                <if test="_null.logIp != null">
+                 <if test="_null.logIp.str == null"> AND log_ip is null</if>
+                </if>
+                <if test="_null.logMark != null">
+                 <if test="_null.logMark.str == null"> AND log_mark is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.logAction != null">
+                 <if test="_not_null.logAction.str != null"> AND log_action is not null</if>
+                </if>
+                <if test="_not_null.logRoute != null">
+                 <if test="_not_null.logRoute.str != null"> AND log_route is not null</if>
+                </if>
+                <if test="_not_null.logIp != null">
+                 <if test="_not_null.logIp.str != null"> AND log_ip is not null</if>
+                </if>
+                <if test="_not_null.logMark != null">
+                 <if test="_not_null.logMark.str != null"> AND log_mark is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+    </select>
+    <select id="selectSyslogInfo" parameterType="SyslogInfo" resultMap="syslogInfoResultMap">
+        SELECT <include refid="SyslogInfoColumns"/>
+        FROM tb_syslog_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="logAction != null">  AND log_action = #{logAction}</if>
+             <if test="logAction == null and _range != null and _range.logAction != null">
+                 <if test="_range.logAction.min != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logAction.min}</if>
+                 <if test="_range.logAction.max != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logAction.max}</if>
+             </if>
+             <if test="logAction == null and _like != null and _like.logAction != null">
+                 <if test="_like.logAction.like != null">AND log_action like '%${_like.logAction.like}%'</if>
+             </if>
+             <if test="logAction == null and _in != null and _in.logAction != null">
+                 <if test="_in.logAction.str != null">AND log_action in (${_in.logAction.str})</if>
+             </if>
+             <if test="logAction == null and _notin != null and _notin.logAction != null">
+                 <if test="_notin.logAction.str != null">AND log_action not in (${_notin.logAction.str})</if>
+             </if>
+             <if test="logRoute != null">  AND log_route = #{logRoute}</if>
+             <if test="logRoute == null and _range != null and _range.logRoute != null">
+                 <if test="_range.logRoute.min != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logRoute.min}</if>
+                 <if test="_range.logRoute.max != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logRoute.max}</if>
+             </if>
+             <if test="logRoute == null and _like != null and _like.logRoute != null">
+                 <if test="_like.logRoute.like != null">AND log_route like '%${_like.logRoute.like}%'</if>
+             </if>
+             <if test="logRoute == null and _in != null and _in.logRoute != null">
+                 <if test="_in.logRoute.str != null">AND log_route in (${_in.logRoute.str})</if>
+             </if>
+             <if test="logRoute == null and _notin != null and _notin.logRoute != null">
+                 <if test="_notin.logRoute.str != null">AND log_route not in (${_notin.logRoute.str})</if>
+             </if>
+             <if test="logIp != null">  AND log_ip = #{logIp}</if>
+             <if test="logIp == null and _range != null and _range.logIp != null">
+                 <if test="_range.logIp.min != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logIp.min}</if>
+                 <if test="_range.logIp.max != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logIp.max}</if>
+             </if>
+             <if test="logIp == null and _like != null and _like.logIp != null">
+                 <if test="_like.logIp.like != null">AND log_ip like '%${_like.logIp.like}%'</if>
+             </if>
+             <if test="logIp == null and _in != null and _in.logIp != null">
+                 <if test="_in.logIp.str != null">AND log_ip in (${_in.logIp.str})</if>
+             </if>
+             <if test="logIp == null and _notin != null and _notin.logIp != null">
+                 <if test="_notin.logIp.str != null">AND log_ip not in (${_notin.logIp.str})</if>
+             </if>
+             <if test="logMark != null">  AND log_mark = #{logMark}</if>
+             <if test="logMark == null and _range != null and _range.logMark != null">
+                 <if test="_range.logMark.min != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logMark.min}</if>
+                 <if test="_range.logMark.max != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logMark.max}</if>
+             </if>
+             <if test="logMark == null and _like != null and _like.logMark != null">
+                 <if test="_like.logMark.like != null">AND log_mark like '%${_like.logMark.like}%'</if>
+             </if>
+             <if test="logMark == null and _in != null and _in.logMark != null">
+                 <if test="_in.logMark.str != null">AND log_mark in (${_in.logMark.str})</if>
+             </if>
+             <if test="logMark == null and _notin != null and _notin.logMark != null">
+                 <if test="_notin.logMark.str != null">AND log_mark not in (${_notin.logMark.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logAction != null">
+                 <if test="_or_like.logAction.like != null">AND log_action like '%${_or_like.logAction.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logAction != null">
+                 <if test="_or.logAction.str != null"> AND log_action = ${_or.logAction.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logAction != null">
+                 <if test="_or_in.logAction.str != null">AND log_action in (${_or_in.logAction.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logAction != null">
+                 <if test="_or_not_in.logAction.str != null">AND log_action not in (${_or_not_in.logAction.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logRoute != null">
+                 <if test="_or_like.logRoute.like != null">AND log_route like '%${_or_like.logRoute.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logRoute != null">
+                 <if test="_or.logRoute.str != null"> AND log_route = ${_or.logRoute.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logRoute != null">
+                 <if test="_or_in.logRoute.str != null">AND log_route in (${_or_in.logRoute.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logRoute != null">
+                 <if test="_or_not_in.logRoute.str != null">AND log_route not in (${_or_not_in.logRoute.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logIp != null">
+                 <if test="_or_like.logIp.like != null">AND log_ip like '%${_or_like.logIp.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logIp != null">
+                 <if test="_or.logIp.str != null"> AND log_ip = ${_or.logIp.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logIp != null">
+                 <if test="_or_in.logIp.str != null">AND log_ip in (${_or_in.logIp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logIp != null">
+                 <if test="_or_not_in.logIp.str != null">AND log_ip not in (${_or_not_in.logIp.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logMark != null">
+                 <if test="_or_like.logMark.like != null">AND log_mark like '%${_or_like.logMark.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logMark != null">
+                 <if test="_or.logMark.str != null"> AND log_mark = ${_or.logMark.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logMark != null">
+                 <if test="_or_in.logMark.str != null">AND log_mark in (${_or_in.logMark.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logMark != null">
+                 <if test="_or_not_in.logMark.str != null">AND log_mark not in (${_or_not_in.logMark.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.logAction != null">
+                 <if test="_null.logAction.str == null"> AND log_action is null</if>
+                </if>
+                <if test="_null.logRoute != null">
+                 <if test="_null.logRoute.str == null"> AND log_route is null</if>
+                </if>
+                <if test="_null.logIp != null">
+                 <if test="_null.logIp.str == null"> AND log_ip is null</if>
+                </if>
+                <if test="_null.logMark != null">
+                 <if test="_null.logMark.str == null"> AND log_mark is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.logAction != null">
+                 <if test="_not_null.logAction.str != null"> AND log_action is not null</if>
+                </if>
+                <if test="_not_null.logRoute != null">
+                 <if test="_not_null.logRoute.str != null"> AND log_route is not null</if>
+                </if>
+                <if test="_not_null.logIp != null">
+                 <if test="_not_null.logIp.str != null"> AND log_ip is not null</if>
+                </if>
+                <if test="_not_null.logMark != null">
+                 <if test="_not_null.logMark.str != null"> AND log_mark is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+        <if test="_order != null">
+        ORDER BY
+        <foreach item="order" index="index" collection="_order" separator=",">
+        <choose>
+            <when test="order.column == 'id'">id ${order.order}</when>
+            <when test="order.column == 'logAction'">log_action ${order.order}</when>
+            <when test="order.column == 'logRoute'">log_route ${order.order}</when>
+            <when test="order.column == 'logIp'">log_ip ${order.order}</when>
+            <when test="order.column == 'logMark'">log_mark ${order.order}</when>
+            <when test="order.column == 'createrId'">creater_id ${order.order}</when>
+            <when test="order.column == 'createdAt'">created_at ${order.order}</when>
+            <when test="order.column == 'updatedAt'">updated_at ${order.order}</when>
+            <when test="order.column == 'timeStamp'">time_stamp ${order.order}</when>
+        </choose>
+        </foreach>
+        </if>
+        <if test="pageSize > 0"> LIMIT #{pageStart},#{pageSize}</if>
+    </select>
+    <select id="selectSyslogInfoByList" parameterType="arraylist" resultMap="syslogInfoResultMap">
+        SELECT <include refid="SyslogInfoColumns"/>
+        FROM tb_syslog_info
+        WHERE id IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
+    </select>
+    <select id="getSyslogInfoSearchCount" parameterType="SyslogInfo" resultType="int">
+        SELECT COUNT(*) AS cnt FROM tb_syslog_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="logAction != null">  AND log_action = #{logAction}</if>
+             <if test="logAction == null and _range != null and _range.logAction != null">
+                 <if test="_range.logAction.min != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logAction.min}</if>
+                 <if test="_range.logAction.max != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logAction.max}</if>
+             </if>
+             <if test="logAction == null and _like != null and _like.logAction != null">
+                 <if test="_like.logAction.like != null">AND log_action like '%${_like.logAction.like}%'</if>
+             </if>
+             <if test="logAction == null and _in != null and _in.logAction != null">
+                 <if test="_in.logAction.str != null">AND log_action in (${_in.logAction.str})</if>
+             </if>
+             <if test="logAction == null and _notin != null and _notin.logAction != null">
+                 <if test="_notin.logAction.str != null">AND log_action not in (${_notin.logAction.str})</if>
+             </if>
+             <if test="logRoute != null">  AND log_route = #{logRoute}</if>
+             <if test="logRoute == null and _range != null and _range.logRoute != null">
+                 <if test="_range.logRoute.min != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logRoute.min}</if>
+                 <if test="_range.logRoute.max != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logRoute.max}</if>
+             </if>
+             <if test="logRoute == null and _like != null and _like.logRoute != null">
+                 <if test="_like.logRoute.like != null">AND log_route like '%${_like.logRoute.like}%'</if>
+             </if>
+             <if test="logRoute == null and _in != null and _in.logRoute != null">
+                 <if test="_in.logRoute.str != null">AND log_route in (${_in.logRoute.str})</if>
+             </if>
+             <if test="logRoute == null and _notin != null and _notin.logRoute != null">
+                 <if test="_notin.logRoute.str != null">AND log_route not in (${_notin.logRoute.str})</if>
+             </if>
+             <if test="logIp != null">  AND log_ip = #{logIp}</if>
+             <if test="logIp == null and _range != null and _range.logIp != null">
+                 <if test="_range.logIp.min != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logIp.min}</if>
+                 <if test="_range.logIp.max != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logIp.max}</if>
+             </if>
+             <if test="logIp == null and _like != null and _like.logIp != null">
+                 <if test="_like.logIp.like != null">AND log_ip like '%${_like.logIp.like}%'</if>
+             </if>
+             <if test="logIp == null and _in != null and _in.logIp != null">
+                 <if test="_in.logIp.str != null">AND log_ip in (${_in.logIp.str})</if>
+             </if>
+             <if test="logIp == null and _notin != null and _notin.logIp != null">
+                 <if test="_notin.logIp.str != null">AND log_ip not in (${_notin.logIp.str})</if>
+             </if>
+             <if test="logMark != null">  AND log_mark = #{logMark}</if>
+             <if test="logMark == null and _range != null and _range.logMark != null">
+                 <if test="_range.logMark.min != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logMark.min}</if>
+                 <if test="_range.logMark.max != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logMark.max}</if>
+             </if>
+             <if test="logMark == null and _like != null and _like.logMark != null">
+                 <if test="_like.logMark.like != null">AND log_mark like '%${_like.logMark.like}%'</if>
+             </if>
+             <if test="logMark == null and _in != null and _in.logMark != null">
+                 <if test="_in.logMark.str != null">AND log_mark in (${_in.logMark.str})</if>
+             </if>
+             <if test="logMark == null and _notin != null and _notin.logMark != null">
+                 <if test="_notin.logMark.str != null">AND log_mark not in (${_notin.logMark.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logAction != null">
+                 <if test="_or_like.logAction.like != null">AND log_action like '%${_or_like.logAction.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logAction != null">
+                 <if test="_or.logAction.str != null"> AND log_action = ${_or.logAction.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logAction != null">
+                 <if test="_or_in.logAction.str != null">AND log_action in (${_or_in.logAction.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logAction != null">
+                 <if test="_or_not_in.logAction.str != null">AND log_action not in (${_or_not_in.logAction.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logRoute != null">
+                 <if test="_or_like.logRoute.like != null">AND log_route like '%${_or_like.logRoute.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logRoute != null">
+                 <if test="_or.logRoute.str != null"> AND log_route = ${_or.logRoute.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logRoute != null">
+                 <if test="_or_in.logRoute.str != null">AND log_route in (${_or_in.logRoute.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logRoute != null">
+                 <if test="_or_not_in.logRoute.str != null">AND log_route not in (${_or_not_in.logRoute.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logIp != null">
+                 <if test="_or_like.logIp.like != null">AND log_ip like '%${_or_like.logIp.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logIp != null">
+                 <if test="_or.logIp.str != null"> AND log_ip = ${_or.logIp.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logIp != null">
+                 <if test="_or_in.logIp.str != null">AND log_ip in (${_or_in.logIp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logIp != null">
+                 <if test="_or_not_in.logIp.str != null">AND log_ip not in (${_or_not_in.logIp.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logMark != null">
+                 <if test="_or_like.logMark.like != null">AND log_mark like '%${_or_like.logMark.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logMark != null">
+                 <if test="_or.logMark.str != null"> AND log_mark = ${_or.logMark.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logMark != null">
+                 <if test="_or_in.logMark.str != null">AND log_mark in (${_or_in.logMark.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logMark != null">
+                 <if test="_or_not_in.logMark.str != null">AND log_mark not in (${_or_not_in.logMark.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.logAction != null">
+                 <if test="_null.logAction.str == null"> AND log_action is null</if>
+                </if>
+                <if test="_null.logRoute != null">
+                 <if test="_null.logRoute.str == null"> AND log_route is null</if>
+                </if>
+                <if test="_null.logIp != null">
+                 <if test="_null.logIp.str == null"> AND log_ip is null</if>
+                </if>
+                <if test="_null.logMark != null">
+                 <if test="_null.logMark.str == null"> AND log_mark is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.logAction != null">
+                 <if test="_not_null.logAction.str != null"> AND log_action is not null</if>
+                </if>
+                <if test="_not_null.logRoute != null">
+                 <if test="_not_null.logRoute.str != null"> AND log_route is not null</if>
+                </if>
+                <if test="_not_null.logIp != null">
+                 <if test="_not_null.logIp.str != null"> AND log_ip is not null</if>
+                </if>
+                <if test="_not_null.logMark != null">
+                 <if test="_not_null.logMark.str != null"> AND log_mark is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+    </select>
+    <select id="searchSyslogInfo" parameterType="SyslogInfo" resultMap="syslogInfoResultMap">
+        SELECT <include refid="SyslogInfoColumns"/>
+        FROM tb_syslog_info
+        <where>
+             <if test="id != null"> id = #{id}</if>
+             <if test="id == null and _range != null and _range.id != null">
+                 <if test="_range.id.min != null">AND id <choose><when test="_range.id.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.id.min}</if>
+                 <if test="_range.id.max != null">AND id <choose><when test="_range.id.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.id.max}</if>
+             </if>
+             <if test="id == null and _like != null and _like.id != null">
+                 <if test="_like.id.like != null">AND id like '%${_like.id.like}%'</if>
+             </if>
+             <if test="id == null and _in != null and _in.id != null">
+                 <if test="_in.id.str != null">AND id in (${_in.id.str})</if>
+             </if>
+             <if test="id == null and _notin != null and _notin.id != null">
+                 <if test="_notin.id.str != null">AND id not in (${_notin.id.str})</if>
+             </if>
+             <if test="logAction != null">  AND log_action = #{logAction}</if>
+             <if test="logAction == null and _range != null and _range.logAction != null">
+                 <if test="_range.logAction.min != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logAction.min}</if>
+                 <if test="_range.logAction.max != null">AND log_action <choose><when test="_range.logAction.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logAction.max}</if>
+             </if>
+             <if test="logAction == null and _like != null and _like.logAction != null">
+                 <if test="_like.logAction.like != null">AND log_action like '%${_like.logAction.like}%'</if>
+             </if>
+             <if test="logAction == null and _in != null and _in.logAction != null">
+                 <if test="_in.logAction.str != null">AND log_action in (${_in.logAction.str})</if>
+             </if>
+             <if test="logAction == null and _notin != null and _notin.logAction != null">
+                 <if test="_notin.logAction.str != null">AND log_action not in (${_notin.logAction.str})</if>
+             </if>
+             <if test="logRoute != null">  AND log_route = #{logRoute}</if>
+             <if test="logRoute == null and _range != null and _range.logRoute != null">
+                 <if test="_range.logRoute.min != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logRoute.min}</if>
+                 <if test="_range.logRoute.max != null">AND log_route <choose><when test="_range.logRoute.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logRoute.max}</if>
+             </if>
+             <if test="logRoute == null and _like != null and _like.logRoute != null">
+                 <if test="_like.logRoute.like != null">AND log_route like '%${_like.logRoute.like}%'</if>
+             </if>
+             <if test="logRoute == null and _in != null and _in.logRoute != null">
+                 <if test="_in.logRoute.str != null">AND log_route in (${_in.logRoute.str})</if>
+             </if>
+             <if test="logRoute == null and _notin != null and _notin.logRoute != null">
+                 <if test="_notin.logRoute.str != null">AND log_route not in (${_notin.logRoute.str})</if>
+             </if>
+             <if test="logIp != null">  AND log_ip = #{logIp}</if>
+             <if test="logIp == null and _range != null and _range.logIp != null">
+                 <if test="_range.logIp.min != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logIp.min}</if>
+                 <if test="_range.logIp.max != null">AND log_ip <choose><when test="_range.logIp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logIp.max}</if>
+             </if>
+             <if test="logIp == null and _like != null and _like.logIp != null">
+                 <if test="_like.logIp.like != null">AND log_ip like '%${_like.logIp.like}%'</if>
+             </if>
+             <if test="logIp == null and _in != null and _in.logIp != null">
+                 <if test="_in.logIp.str != null">AND log_ip in (${_in.logIp.str})</if>
+             </if>
+             <if test="logIp == null and _notin != null and _notin.logIp != null">
+                 <if test="_notin.logIp.str != null">AND log_ip not in (${_notin.logIp.str})</if>
+             </if>
+             <if test="logMark != null">  AND log_mark = #{logMark}</if>
+             <if test="logMark == null and _range != null and _range.logMark != null">
+                 <if test="_range.logMark.min != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.logMark.min}</if>
+                 <if test="_range.logMark.max != null">AND log_mark <choose><when test="_range.logMark.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.logMark.max}</if>
+             </if>
+             <if test="logMark == null and _like != null and _like.logMark != null">
+                 <if test="_like.logMark.like != null">AND log_mark like '%${_like.logMark.like}%'</if>
+             </if>
+             <if test="logMark == null and _in != null and _in.logMark != null">
+                 <if test="_in.logMark.str != null">AND log_mark in (${_in.logMark.str})</if>
+             </if>
+             <if test="logMark == null and _notin != null and _notin.logMark != null">
+                 <if test="_notin.logMark.str != null">AND log_mark not in (${_notin.logMark.str})</if>
+             </if>
+             <if test="createrId != null">  AND creater_id = #{createrId}</if>
+             <if test="createrId == null and _range != null and _range.createrId != null">
+                 <if test="_range.createrId.min != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createrId.min}</if>
+                 <if test="_range.createrId.max != null">AND creater_id <choose><when test="_range.createrId.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createrId.max}</if>
+             </if>
+             <if test="createrId == null and _like != null and _like.createrId != null">
+                 <if test="_like.createrId.like != null">AND creater_id like '%${_like.createrId.like}%'</if>
+             </if>
+             <if test="createrId == null and _in != null and _in.createrId != null">
+                 <if test="_in.createrId.str != null">AND creater_id in (${_in.createrId.str})</if>
+             </if>
+             <if test="createrId == null and _notin != null and _notin.createrId != null">
+                 <if test="_notin.createrId.str != null">AND creater_id not in (${_notin.createrId.str})</if>
+             </if>
+             <if test="createdAt != null">  AND created_at = #{createdAt}</if>
+             <if test="createdAt == null and _range != null and _range.createdAt != null">
+                 <if test="_range.createdAt.min != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.createdAt.min}</if>
+                 <if test="_range.createdAt.max != null">AND created_at <choose><when test="_range.createdAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.createdAt.max}</if>
+             </if>
+             <if test="createdAt == null and _like != null and _like.createdAt != null">
+                 <if test="_like.createdAt.like != null">AND created_at like '%${_like.createdAt.like}%'</if>
+             </if>
+             <if test="createdAt == null and _in != null and _in.createdAt != null">
+                 <if test="_in.createdAt.str != null">AND created_at in (${_in.createdAt.str})</if>
+             </if>
+             <if test="createdAt == null and _notin != null and _notin.createdAt != null">
+                 <if test="_notin.createdAt.str != null">AND created_at not in (${_notin.createdAt.str})</if>
+             </if>
+             <if test="updatedAt != null">  AND updated_at = #{updatedAt}</if>
+             <if test="updatedAt == null and _range != null and _range.updatedAt != null">
+                 <if test="_range.updatedAt.min != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.updatedAt.min}</if>
+                 <if test="_range.updatedAt.max != null">AND updated_at <choose><when test="_range.updatedAt.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.updatedAt.max}</if>
+             </if>
+             <if test="updatedAt == null and _like != null and _like.updatedAt != null">
+                 <if test="_like.updatedAt.like != null">AND updated_at like '%${_like.updatedAt.like}%'</if>
+             </if>
+             <if test="updatedAt == null and _in != null and _in.updatedAt != null">
+                 <if test="_in.updatedAt.str != null">AND updated_at in (${_in.updatedAt.str})</if>
+             </if>
+             <if test="updatedAt == null and _notin != null and _notin.updatedAt != null">
+                 <if test="_notin.updatedAt.str != null">AND updated_at not in (${_notin.updatedAt.str})</if>
+             </if>
+             <if test="timeStamp != null">  AND time_stamp = #{timeStamp}</if>
+             <if test="timeStamp == null and _range != null and _range.timeStamp != null">
+                 <if test="_range.timeStamp.min != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[>=]]></when><otherwise><![CDATA[>]]></otherwise></choose> #{_range.timeStamp.min}</if>
+                 <if test="_range.timeStamp.max != null">AND time_stamp <choose><when test="_range.timeStamp.equal"><![CDATA[<=]]></when><otherwise><![CDATA[<]]></otherwise></choose> #{_range.timeStamp.max}</if>
+             </if>
+             <if test="timeStamp == null and _like != null and _like.timeStamp != null">
+                 <if test="_like.timeStamp.like != null">AND time_stamp like '%${_like.timeStamp.like}%'</if>
+             </if>
+             <if test="timeStamp == null and _in != null and _in.timeStamp != null">
+                 <if test="_in.timeStamp.str != null">AND time_stamp in (${_in.timeStamp.str})</if>
+             </if>
+             <if test="timeStamp == null and _notin != null and _notin.timeStamp != null">
+                 <if test="_notin.timeStamp.str != null">AND time_stamp not in (${_notin.timeStamp.str})</if>
+             </if>
+             <if test="_or != null"> OR (
+                <if test="1==1">1=1
+                </if>
+             <if test="_or_like != null and _or_like.id != null">
+                 <if test="_or_like.id.like != null">AND id like '%${_or_like.id.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.id != null">
+                 <if test="_or.id.str != null"> AND id = ${_or.id.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.id != null">
+                 <if test="_or_in.id.str != null">AND id in (${_or_in.id.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.id != null">
+                 <if test="_or_not_in.id.str != null">AND id not in (${_or_not_in.id.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logAction != null">
+                 <if test="_or_like.logAction.like != null">AND log_action like '%${_or_like.logAction.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logAction != null">
+                 <if test="_or.logAction.str != null"> AND log_action = ${_or.logAction.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logAction != null">
+                 <if test="_or_in.logAction.str != null">AND log_action in (${_or_in.logAction.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logAction != null">
+                 <if test="_or_not_in.logAction.str != null">AND log_action not in (${_or_not_in.logAction.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logRoute != null">
+                 <if test="_or_like.logRoute.like != null">AND log_route like '%${_or_like.logRoute.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logRoute != null">
+                 <if test="_or.logRoute.str != null"> AND log_route = ${_or.logRoute.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logRoute != null">
+                 <if test="_or_in.logRoute.str != null">AND log_route in (${_or_in.logRoute.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logRoute != null">
+                 <if test="_or_not_in.logRoute.str != null">AND log_route not in (${_or_not_in.logRoute.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logIp != null">
+                 <if test="_or_like.logIp.like != null">AND log_ip like '%${_or_like.logIp.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logIp != null">
+                 <if test="_or.logIp.str != null"> AND log_ip = ${_or.logIp.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logIp != null">
+                 <if test="_or_in.logIp.str != null">AND log_ip in (${_or_in.logIp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logIp != null">
+                 <if test="_or_not_in.logIp.str != null">AND log_ip not in (${_or_not_in.logIp.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.logMark != null">
+                 <if test="_or_like.logMark.like != null">AND log_mark like '%${_or_like.logMark.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.logMark != null">
+                 <if test="_or.logMark.str != null"> AND log_mark = ${_or.logMark.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.logMark != null">
+                 <if test="_or_in.logMark.str != null">AND log_mark in (${_or_in.logMark.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.logMark != null">
+                 <if test="_or_not_in.logMark.str != null">AND log_mark not in (${_or_not_in.logMark.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createrId != null">
+                 <if test="_or_like.createrId.like != null">AND creater_id like '%${_or_like.createrId.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createrId != null">
+                 <if test="_or.createrId.str != null"> AND creater_id = ${_or.createrId.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createrId != null">
+                 <if test="_or_in.createrId.str != null">AND creater_id in (${_or_in.createrId.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createrId != null">
+                 <if test="_or_not_in.createrId.str != null">AND creater_id not in (${_or_not_in.createrId.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.createdAt != null">
+                 <if test="_or_like.createdAt.like != null">AND created_at like '%${_or_like.createdAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.createdAt != null">
+                 <if test="_or.createdAt.str != null"> AND created_at = ${_or.createdAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.createdAt != null">
+                 <if test="_or_in.createdAt.str != null">AND created_at in (${_or_in.createdAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.createdAt != null">
+                 <if test="_or_not_in.createdAt.str != null">AND created_at not in (${_or_not_in.createdAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.updatedAt != null">
+                 <if test="_or_like.updatedAt.like != null">AND updated_at like '%${_or_like.updatedAt.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.updatedAt != null">
+                 <if test="_or.updatedAt.str != null"> AND updated_at = ${_or.updatedAt.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.updatedAt != null">
+                 <if test="_or_in.updatedAt.str != null">AND updated_at in (${_or_in.updatedAt.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.updatedAt != null">
+                 <if test="_or_not_in.updatedAt.str != null">AND updated_at not in (${_or_not_in.updatedAt.str})</if>
+             </if>
+             <if test="_or_like != null and _or_like.timeStamp != null">
+                 <if test="_or_like.timeStamp.like != null">AND time_stamp like '%${_or_like.timeStamp.like}%'</if>
+             </if>
+                <if test=" _or != null and _or.timeStamp != null">
+                 <if test="_or.timeStamp.str != null"> AND time_stamp = ${_or.timeStamp.str}</if>
+                </if>
+                 <if test=" _or_in != null and _or_in.timeStamp != null">
+                 <if test="_or_in.timeStamp.str != null">AND time_stamp in (${_or_in.timeStamp.str})</if>
+             </if>
+                 <if test=" _or_not_in != null and _or_not_in.timeStamp != null">
+                 <if test="_or_not_in.timeStamp.str != null">AND time_stamp not in (${_or_not_in.timeStamp.str})</if>
+             </if>
+             )
+             </if>
+             <if test="_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_null.id != null">
+                 <if test="_null.id.str == null"> AND id is null</if>
+                </if>
+                <if test="_null.logAction != null">
+                 <if test="_null.logAction.str == null"> AND log_action is null</if>
+                </if>
+                <if test="_null.logRoute != null">
+                 <if test="_null.logRoute.str == null"> AND log_route is null</if>
+                </if>
+                <if test="_null.logIp != null">
+                 <if test="_null.logIp.str == null"> AND log_ip is null</if>
+                </if>
+                <if test="_null.logMark != null">
+                 <if test="_null.logMark.str == null"> AND log_mark is null</if>
+                </if>
+                <if test="_null.createrId != null">
+                 <if test="_null.createrId.str == null"> AND creater_id is null</if>
+                </if>
+                <if test="_null.createdAt != null">
+                 <if test="_null.createdAt.str == null"> AND created_at is null</if>
+                </if>
+                <if test="_null.updatedAt != null">
+                 <if test="_null.updatedAt.str == null"> AND updated_at is null</if>
+                </if>
+                <if test="_null.timeStamp != null">
+                 <if test="_null.timeStamp.str == null"> AND time_stamp is null</if>
+                </if>
+             </if>
+             <if test="_not_null != null"> AND 
+                <if test="1==1">1=1
+                </if>
+                <if test="_not_null.id != null">
+                 <if test="_not_null.id.str != null"> AND id is not null</if>
+                </if>
+                <if test="_not_null.logAction != null">
+                 <if test="_not_null.logAction.str != null"> AND log_action is not null</if>
+                </if>
+                <if test="_not_null.logRoute != null">
+                 <if test="_not_null.logRoute.str != null"> AND log_route is not null</if>
+                </if>
+                <if test="_not_null.logIp != null">
+                 <if test="_not_null.logIp.str != null"> AND log_ip is not null</if>
+                </if>
+                <if test="_not_null.logMark != null">
+                 <if test="_not_null.logMark.str != null"> AND log_mark is not null</if>
+                </if>
+                <if test="_not_null.createrId != null">
+                 <if test="_not_null.createrId.str != null"> AND creater_id is not null</if>
+                </if>
+                <if test="_not_null.createdAt != null">
+                 <if test="_not_null.createdAt.str != null"> AND created_at is not null</if>
+                </if>
+                <if test="_not_null.updatedAt != null">
+                 <if test="_not_null.updatedAt.str != null"> AND updated_at is not null</if>
+                </if>
+                <if test="_not_null.timeStamp != null">
+                 <if test="_not_null.timeStamp.str != null"> AND time_stamp is not null</if>
+                </if>
+             </if>
+        </where>
+        <if test="_order != null">
+        ORDER BY
+        <foreach item="order" index="index" collection="_order" separator=",">
+        <choose>
+            <when test="order.column == 'id'">id ${order.order}</when>
+            <when test="order.column == 'logAction'">log_action ${order.order}</when>
+            <when test="order.column == 'logRoute'">log_route ${order.order}</when>
+            <when test="order.column == 'logIp'">log_ip ${order.order}</when>
+            <when test="order.column == 'logMark'">log_mark ${order.order}</when>
+            <when test="order.column == 'createrId'">creater_id ${order.order}</when>
+            <when test="order.column == 'createdAt'">created_at ${order.order}</when>
+            <when test="order.column == 'updatedAt'">updated_at ${order.order}</when>
+            <when test="order.column == 'timeStamp'">time_stamp ${order.order}</when>
+        </choose>
+        </foreach>
+        </if>
+        <if test="pageSize > 0"> LIMIT #{pageStart},#{pageSize}</if>
+    </select>
+</mapper>
